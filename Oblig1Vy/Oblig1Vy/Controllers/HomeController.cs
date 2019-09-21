@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oblig1Vy.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,12 @@ namespace Oblig1Vy.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(TravelSearch travelSearch)
+        {
+            return RedirectToAction("Index");
         }
 
         public ActionResult About()
@@ -27,4 +34,6 @@ namespace Oblig1Vy.Controllers
             return View();
         }
     }
+
+ 
 }
