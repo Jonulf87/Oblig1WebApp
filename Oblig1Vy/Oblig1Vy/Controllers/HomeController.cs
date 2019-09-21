@@ -11,6 +11,10 @@ namespace Oblig1Vy.Controllers
     {
         public ActionResult Index()
         {
+            var context = new Oblig1Context();
+
+            var locations = context.Locations.ToList();
+
             return View();
         }
 
