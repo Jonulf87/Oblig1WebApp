@@ -10,8 +10,8 @@ namespace Oblig1Vy.Models
         public int Id { get; set; }
         public virtual Location Departure { get; set; }
         public int DepartureId { get; set; }
-        public virtual Location Arrvial { get; set; }
-        public int ArrvialId { get; set; }
+        public virtual Location Arrival { get; set; }
+        public int ArrivalId { get; set; }
         public decimal Cost { get; set; }
         public DateTime DepartureTime { get; set; }
     }

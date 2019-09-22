@@ -11,6 +11,22 @@ namespace Oblig1Vy
     {
         public Oblig1Context() : base("Oblig1Context")
         {
+            Database.SetInitializer(new Oblig1Initializer());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TrainRoute>()
+                    .HasRequired<Location>(p => p.Arrival)
+                    .WithMany(t => t.Arrivals)
+                    .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TrainRoute>()
+                    .HasRequired<Location>(p => p.Departure)
+                    .WithMany(t => t.Departures)
+                    .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Location> Locations { get; set; }
