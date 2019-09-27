@@ -5,47 +5,52 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
+
 namespace Oblig1Vy
 {
     public class Oblig1Initializer : DropCreateDatabaseIfModelChanges<Oblig1Context>
     {
         protected override void Seed(Oblig1Context context)
-        {
-            var locations = new List<Location>
+         {
+           var stations = new List<Station>
             {
-                new Location() { LocationName = "Stavanger" },
-                new Location() { LocationName = "Kristiansand" },
-                new Location() { LocationName = "Oslo" },
-                new Location() { LocationName = "Trondheim" }
+                new Station() { StationName = "Stavanger" },
+                new Station() { StationName = "Kristiansand" },
+                new Station() { StationName = "Oslo" },
+                new Station() { StationName = "Trondheim" }
             };
 
-            context.Locations.AddRange(locations);
+            context.Stations.AddRange(stations);
 
             context.SaveChanges();
 
-            for (int i = 0; i < 30; i++)
-            {
-                var morningRoute = new TrainRoute
-                {
-                    ArrivalId = locations[0].Id,
-                    DepartureId = locations[2].Id,
-                    Cost = 299,
-                    DepartureTime = DateTime.Now.Date.AddHours(8).AddDays(i)
-                };
 
-                var eveningRoute = new TrainRoute
-                {
-                    ArrivalId = locations[0].Id,
-                    DepartureId = locations[2].Id,
-                    Cost = 299,
-                    DepartureTime = DateTime.Now.Date.AddHours(16).AddDays(i)
-                };
 
-                context.TrainRoutes.Add(morningRoute);
-                context.TrainRoutes.Add(eveningRoute);
-            }
+            //Legger til Stavanger-Oslo
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    var morningRoute = new TrainRoute
+            //    {
+            //        ArrivalId = locations[0].Id,
+            //        DepartureId = locations[2].Id,
+            //        Cost = 299,
+            //        DepartureTime = DateTime.Now.Date.AddHours(8).AddDays(i)
+            //    };
 
-            context.SaveChanges();
+            //    var eveningRoute = new TrainRoute
+            //    {
+            //        ArrivalId = locations[0].Id,
+            //        DepartureId = locations[2].Id,
+            //        Cost = 299,
+            //        DepartureTime = DateTime.Now.Date.AddHours(16).AddDays(i)
+            //    };
+
+            //    context.TrainRoutes.Add(morningRoute);
+            //    context.TrainRoutes.Add(eveningRoute);
+            //}
+
+            
+            //context.SaveChanges();
 
             base.Seed(context);
         }

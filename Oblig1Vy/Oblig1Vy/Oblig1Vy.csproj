@@ -130,8 +130,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\TrainRoute.cs" />
+    <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\OperationalInterval.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\Trip.cs" />
     <Compile Include="Oblig1Context.cs" />
     <Compile Include="Oblig1Initializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

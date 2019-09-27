@@ -13,7 +13,7 @@ namespace Oblig1Vy.Controllers
         {
             var context = new Oblig1Context();
 
-            var locations = context.Locations.ToList();
+            
 
             return View();
         }

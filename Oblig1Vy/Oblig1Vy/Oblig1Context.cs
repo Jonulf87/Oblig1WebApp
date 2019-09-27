@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -16,20 +17,16 @@ namespace Oblig1Vy
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TrainRoute>()
-                    .HasRequired<Location>(p => p.Arrival)
-                    .WithMany(t => t.Arrivals)
-                    .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<TrainRoute>()
-                    .HasRequired<Location>(p => p.Departure)
-                    .WithMany(t => t.Departures)
-                    .WillCascadeOnDelete(false);
-
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
+        
 
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<TrainRoute> TrainRoutes { get; set; }
+        public DbSet<Line> Lines { get; set; }
+        public DbSet<OperationalInterval> OperationalIntervals { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Station> Stations { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Trip> Trips { get; set; }
+
     }
 }

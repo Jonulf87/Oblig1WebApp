@@ -6,15 +6,17 @@ using System.Web;
 
 namespace Oblig1Vy.Models
 {
-    public class Location
+    public class Station
     {
         public int Id { get; set; }
-        public string LocationName { get; set; }
+        public string StationName { get; set; }
 
         [InverseProperty("Departure")]
-        public virtual List<TrainRoute> Departures { get; set; }
+        public virtual List<Line> Departures { get; set; }
 
         [InverseProperty("Arrival")]
-        public virtual List<TrainRoute> Arrivals { get; set; }
+        public virtual List<Line> Arrivals { get; set; }
+        public virtual List<Schedule> Schedules { get; set; }
+
     }
 }
