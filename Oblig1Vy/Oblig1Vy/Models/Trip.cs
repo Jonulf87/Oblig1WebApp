@@ -10,9 +10,11 @@ namespace Oblig1Vy.Models
         public int Id { get; set; }
         public virtual List<Ticket> Tickets { get; set; }
         public virtual OperationalInterval OperationalInterval { get; set; }
+        public int OperationalIntervalId { get; set; }
         public virtual Line Line { get; set; }
+        public int LineId { get; set; }
         public virtual List<Schedule> Schedules { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public DateTime ArrivalTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
+        public TimeSpan ArrivalTime { get; set; }
     }
 }

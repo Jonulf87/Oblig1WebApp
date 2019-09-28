@@ -10,9 +10,11 @@ namespace Oblig1Vy.Models
     {
         [Display]
         public int Id { get; set; }
-        public DateTime ArrivalTime { get; set; }
-        public DateTime DepartureTime { get; set; }
+        public TimeSpan? ArrivalTime { get; set; }
+        public TimeSpan? DepartureTime { get; set; }
         public virtual Station Station { get; set; }
+        public int StationId { get; set; }
         public virtual Trip Trip { get; set; }
+        public int TripId { get; set; }
     }
 }
