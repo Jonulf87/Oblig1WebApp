@@ -1,4 +1,5 @@
-﻿using Oblig1Vy.ViewModels;
+﻿using Oblig1Vy.Models;
+using Oblig1Vy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,14 @@ namespace Oblig1Vy.Controllers
         {
             var context = new Oblig1Context();
 
-            
-
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(TravelSearch travelSearch)
+        public ActionResult Index(TravelSearchVm travelSearch)
         {
-            return RedirectToAction("Index");
+            Oblig1Context db = new Oblig1Context();
+            return RedirectToAction("avgangstider");
         }
 
         public ActionResult About()
@@ -37,6 +37,21 @@ namespace Oblig1Vy.Controllers
 
             return View();
         }
+
+        public JsonResult AutoComplete(string term)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var stations = db.Stations.Where(a => a.StationName.StartsWith(term)).Select(b => new AutoCompleteSearchVm
+                {
+                    StationId = b.Id,
+                    StationName = b.StationName
+                }).ToList();
+
+                return Json(stations, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 
  

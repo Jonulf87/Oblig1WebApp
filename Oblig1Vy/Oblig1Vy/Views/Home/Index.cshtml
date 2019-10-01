@@ -1,14 +1,14 @@
 ﻿
-@model Oblig1Vy.Models.Line
+@model Oblig1Vy.ViewModels.TravelSearchVm
 @{
     ViewBag.Title = "Home Page";
 }
 
 @*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>*@
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -19,27 +19,70 @@
     @using (Html.BeginForm())
     {
 
-    <div class="form-horizontal">
-        
-        <hr />
+        <div class="form-horizontal">
 
-        <div class="form-group col-md-12" align="center">
-            <input type="text" placeholder="Avgang" id="searchField" />
-            <input type="text" placeholder="Ankomst" id="searchField" />
-            <input type="submit" value="Søk" class="btn btn-default" id="searchButton" />
-        </div>
+            <hr />
 
+            <div class="form-group col-md-12 ui-widget" align="center">
+                @Html.TextBox("departureSearch", null, new { id = "depSearch", placeholder = "Avgang" })
+                @Html.TextBox("arrivalSearch", null, new { id = "arrSearch", placeholder = "Ankomst" })
+                
+                <input type="hidden" name="DepartureId" id="depSearch-id" value=""/>
+                <input type="hidden" name="ArrivalId" id="arrSearch-id" value=""/>
 
-        @*<div class="form-group">
-            <div class="col-md-12" align="center">
-                <input type="submit" value="Søk" class="btn btn-default" />
+                <input type="submit" value="Søk" class="btn btn-default" id="searchButton" />
             </div>
-        </div>*@
-    </div>
+
+        </div>
     }
 
-    @*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
+
 
 </div>
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#depSearch").autocomplete({
+                source: "@Url.Action("AutoComplete")",
+
+                focus: function(event, ui) {
+                    $("#depSearch").val(ui.item.StationName);
+                    
+                    return false;
+                },
+
+                select: function(event, ui) {
+                    $("#depSearch").val(ui.item.StationName);
+                    $("#depSearch-id").val(ui.item.StationId);
+            
+                    return false;
+                }
+            }).autocomplete("instance")._renderItem = function(ul, item) {
+                return $("<li>")
+                    .append(item.StationName)
+                    .appendTo(ul);
+                };
+            $("#arrSearch").autocomplete({
+                source: "@Url.Action("AutoComplete")",
+
+                focus: function(event, ui) {
+                    $("#arrSearch").val(ui.item.StationName);
+                    
+                    return false;
+                },
+
+                select: function(event, ui) {
+                    $("#arrSearch").val(ui.item.StationName);
+                    $("#arrSearch-id").val(ui.item.StationId);
+            
+                    return false;
+                }
+            }).autocomplete("instance")._renderItem = function(ul, item) {
+                return $("<li>")
+                    .append(item.StationName)
+                    .appendTo(ul);
+                };
+        });
+
+    </script>
+}
