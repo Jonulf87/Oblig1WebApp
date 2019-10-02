@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Oblig1Vy.ViewModels.DepartureTimeVm>
+
+@{
+    ViewBag.Title = "DepartureTimes";
+}
+
+<h2>DepartureTimes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TripId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureStationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DepartureStationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalStationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArrivalStationTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TripId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureStationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartureStationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalStationId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArrivalStationTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

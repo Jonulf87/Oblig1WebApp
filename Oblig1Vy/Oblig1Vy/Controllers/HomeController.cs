@@ -21,7 +21,17 @@ namespace Oblig1Vy.Controllers
         public ActionResult Index(TravelSearchVm travelSearch)
         {
             Oblig1Context db = new Oblig1Context();
-            return RedirectToAction("avgangstider");
+            return RedirectToAction("DepartureTimes");
+        }
+
+        public ActionResult DepartureTimes()
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var departureTimeResult = new DepartureTimeVm();
+                departureTimeResult.DepartureStation = db.Schedules.Where()
+            }
+            return View();
         }
 
         public ActionResult About()

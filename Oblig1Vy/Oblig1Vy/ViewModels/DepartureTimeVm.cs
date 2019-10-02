@@ -22,6 +22,7 @@ namespace Oblig1Vy.ViewModels
 
     public class DepartureTimeStop
     {
+        
         public string Name { get; set; }
         public DateTime DepartureTime { get; set; }
     }

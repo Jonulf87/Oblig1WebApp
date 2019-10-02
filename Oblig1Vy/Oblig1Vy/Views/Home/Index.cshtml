@@ -23,14 +23,15 @@
 
             <hr />
 
-            <div class="form-group col-md-12 ui-widget" align="center">
+            <div class="form-group ui-widget datepicker" align="center">
                 @Html.TextBox("departureSearch", null, new { id = "depSearch", placeholder = "Avgang" })
                 @Html.TextBox("arrivalSearch", null, new { id = "arrSearch", placeholder = "Ankomst" })
-                
-                <input type="hidden" name="DepartureId" id="depSearch-id" value=""/>
-                <input type="hidden" name="ArrivalId" id="arrSearch-id" value=""/>
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new {@class = "datepicker"} })
 
-                <input type="submit" value="Søk" class="btn btn-default" id="searchButton" />
+                <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
+                <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
+
+                <input type="submit" value="Søk" class="btn btn-primary" id="searchButton" />
             </div>
 
         </div>
@@ -41,7 +42,14 @@
 </div>
 @section scripts {
     <script type="text/javascript">
+        
+
+
         $(function () {
+
+            //$("#datepicker").datepicker();
+
+
             $("#depSearch").autocomplete({
                 source: "@Url.Action("AutoComplete")",
 
