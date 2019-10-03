@@ -12,15 +12,12 @@ namespace Oblig1Vy.Controllers
     {
         public ActionResult Index()
         {
-            var context = new Oblig1Context();
-
             return View();
         }
 
         [HttpPost]
         public ActionResult Index(TravelSearchVm travelSearch)
         {
-            Oblig1Context db = new Oblig1Context();
             return RedirectToAction("DepartureTimes", travelSearch);
         }
 
@@ -28,30 +25,85 @@ namespace Oblig1Vy.Controllers
         {
             using (Oblig1Context db = new Oblig1Context())
             {
+                var ois = db.OperationalIntervals
+                    .Where(a => a.StartDate <= travelSearch.Date && a.EndDate >= travelSearch.Date);
 
-                var trip = db.OperationalIntervals
-                    .Where(a => a.StartDate <= travelSearch.Date && a.EndDate >= travelSearch.Date)
-                    .SelectMany(a => a.Trips)
+                //if (travelSearch.Date.DayOfWeek == DayOfWeek.Sunday)
+                //{
+                //    ois = ois.Where(a => a.Sunday);
+                //}
+                //else if (travelSearch.Date.DayOfWeek == DayOfWeek.Monday)
+                //{
+                //    ois = ois.Where(a => a.Monday);
+                //}
+                switch (travelSearch.Date.DayOfWeek)
+                {
+                    case DayOfWeek.Sunday:
+                        ois = ois.Where(a => a.Sunday);
+                        break;
+                    case DayOfWeek.Monday:
+                        ois = ois.Where(a => a.Monday);
+                        break;
+                    case DayOfWeek.Tuesday:
+                        ois = ois.Where(a => a.Tuesday);
+                        break;
+                    case DayOfWeek.Wednesday:
+                        ois = ois.Where(a => a.Wednesday);
+                        break;
+                    case DayOfWeek.Thursday:
+                        ois = ois.Where(a => a.Thursday);
+                        break;
+                    case DayOfWeek.Friday:
+                        ois = ois.Where(a => a.Friday);
+                        break;
+                    case DayOfWeek.Saturday:
+                        ois = ois.Where(a => a.Saturday);
+                        break;
+                }
+
+                //var trips = db.OperationalIntervals
+                //    .Where(a => a.StartDate <= travelSearch.Date && a.EndDate >= travelSearch.Date)
+                //    .SelectMany(a => a.Trips)
+                //    .Where(a => a.Schedules.Any(b => b.StationId == travelSearch.DepartureId) && a.Schedules.Any(b => b.StationId == travelSearch.ArrivalId))
+                //    .ToList();
+
+                var trips = ois.SelectMany(a => a.Trips)
                     .Where(a => a.Schedules.Any(b => b.StationId == travelSearch.DepartureId) && a.Schedules.Any(b => b.StationId == travelSearch.ArrivalId))
                     .ToList();
 
-               
+                List<DepartureTimeVm> departureTimeList = new List<DepartureTimeVm>();
 
-                    foreach (var item in trip)
+                foreach (var trip in trips)
+                {
+                    var arrivalSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == travelSearch.ArrivalId);
+                    var departureSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == travelSearch.DepartureId);
+
+                    if (departureSchedule.DepartureTime < arrivalSchedule.ArrivalTime)
                     {
-                        foreach (var stop in item.Schedules)
+                        var stops = trip.Schedules
+                            .Where(a => a.DepartureTime > departureSchedule.DepartureTime && a.ArrivalTime < arrivalSchedule.ArrivalTime)
+                            .OrderBy(a => a.DepartureTime)
+                            .Select(a => new DepartureTimeStop
+                            {
+                                Name = a.Station.StationName,
+                                DepartureTime = a.DepartureTime.Value
+                            }).ToList();
+
+                        departureTimeList.Add(new DepartureTimeVm
                         {
-                        if () { } ;
-                        }
+                            TripId = trip.Id,
+                            DepartureStationId = travelSearch.DepartureId,
+                            DepartureStationTime = departureSchedule.DepartureTime.Value,
+                            ArrivalStationId = travelSearch.ArrivalId,
+                            ArrivalStationTime = arrivalSchedule.ArrivalTime.Value,
+                            Stops = stops
+                        });
                     }
-                
+                }
 
 
-
-                var departureTimeResult = new DepartureTimeVm();
-                
+                return View(departureTimeList);
             }
-            return View();
         }
 
         public ActionResult About()

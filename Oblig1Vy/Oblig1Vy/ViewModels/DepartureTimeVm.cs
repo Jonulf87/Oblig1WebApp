@@ -12,10 +12,10 @@ namespace Oblig1Vy.ViewModels
         public int TripId { get; set; }
         public string DepartureStation { get; set; }
         public int DepartureStationId { get; set; }
-        public DateTime DepartureStationTime { get; set; }
+        public TimeSpan DepartureStationTime { get; set; }
         public string ArrivalStation { get; set; }
         public int ArrivalStationId { get; set; }
-        public DateTime ArrivalStationTime { get; set; }
+        public TimeSpan ArrivalStationTime { get; set; }
         public List<DepartureTimeStop> Stops { get; set; }
 
     }
@@ -24,6 +24,6 @@ namespace Oblig1Vy.ViewModels
     {
         
         public string Name { get; set; }
-        public DateTime DepartureTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
     }
 }

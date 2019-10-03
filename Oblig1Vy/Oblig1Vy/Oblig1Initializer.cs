@@ -409,6 +409,9 @@ namespace Oblig1Vy
                 },
             };
 
+            context.Schedules.AddRange(schedules);
+            context.SaveChanges();
+
             base.Seed(context);
         }
     }
