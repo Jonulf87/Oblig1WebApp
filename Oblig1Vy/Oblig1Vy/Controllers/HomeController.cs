@@ -21,15 +21,35 @@ namespace Oblig1Vy.Controllers
         public ActionResult Index(TravelSearchVm travelSearch)
         {
             Oblig1Context db = new Oblig1Context();
-            return RedirectToAction("DepartureTimes");
+            return RedirectToAction("DepartureTimes", travelSearch);
         }
 
-        public ActionResult DepartureTimes()
+        public ActionResult DepartureTimes(TravelSearchVm travelSearch)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
+
+                var trip = db.OperationalIntervals
+                    .Where(a => a.StartDate <= travelSearch.Date && a.EndDate >= travelSearch.Date)
+                    .SelectMany(a => a.Trips)
+                    .Where(a => a.Schedules.Any(b => b.StationId == travelSearch.DepartureId) && a.Schedules.Any(b => b.StationId == travelSearch.ArrivalId))
+                    .ToList();
+
+               
+
+                    foreach (var item in trip)
+                    {
+                        foreach (var stop in item.Schedules)
+                        {
+                        if () { } ;
+                        }
+                    }
+                
+
+
+
                 var departureTimeResult = new DepartureTimeVm();
-                //departureTimeResult.DepartureStation = db.Schedules.Where()
+                
             }
             return View();
         }
