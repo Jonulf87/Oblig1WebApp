@@ -15,7 +15,7 @@
         <h1>Kjøp billeter:</h1>
     </div>
 </div>
-<div class="row">
+<div class="container">
     @using (Html.BeginForm())
     {
 
@@ -23,15 +23,39 @@
 
             <hr />
 
-            <div class="form-group ui-widget datepicker" align="center">
-                @Html.TextBox("departureSearch", null, new { id = "depSearch", placeholder = "Avgang" })
-                @Html.TextBox("arrivalSearch", null, new { id = "arrSearch", placeholder = "Ankomst" })
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new {@class = "datepicker"} })
+            <div class="form-inline ui-widget datepicker col-lg-12 col-md-12" align="center">
+                <table class="col-md-3">
+                    <tr>
+                        <th>Reise Til</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.TextBox("departureSearch", null, new { @class = "form-control", id = "depSearch", placeholder = "Avgang" })</td>
+                    </tr>
 
-                <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
-                <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
+                </table>
+                <table class="col-md-3">
+                    <tr>
+                        <th>Reise til</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.TextBox("arrivalSearch", null, new { @class = "form-control", id = "arrSearch", placeholder = "Ankomst" })</td>
+                    </tr>
+                </table>
+                <table class="col-md-3">
+                    <tr>
+                        <th>Når</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepick form-control col-md-3" } })</td>
+                    </tr>
+                </table>        
 
-                <input type="submit" value="Søk" class="btn btn-primary" id="searchButton" />
+                 <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
+                 <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
+                 <div class="col-md-12">
+                     <br />
+                     <input type="submit" value="Søk" class="btn btn-primary" id="searchButton" />
+                 </div>
             </div>
 
         </div>
