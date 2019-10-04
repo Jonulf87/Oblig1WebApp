@@ -12,53 +12,34 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h1>Kjøp billeter:</h1>
+        <h1><strong>Kjøp billeter</strong></h1>
     </div>
 </div>
 <div class="container">
     @using (Html.BeginForm())
     {
 
-        <div class="form-horizontal">
 
             <hr />
-
-            <div class="form-inline ui-widget datepicker col-lg-12 col-md-12" align="center">
-                <table class="col-md-3">
-                    <tr>
-                        <th>Reise Til</th>
-                    </tr>
-                    <tr>
-                        <td>@Html.TextBox("departureSearch", null, new { @class = "form-control", id = "depSearch", placeholder = "Avgang" })</td>
-                    </tr>
-
-                </table>
-                <table class="col-md-3">
-                    <tr>
-                        <th>Reise til</th>
-                    </tr>
-                    <tr>
-                        <td>@Html.TextBox("arrivalSearch", null, new { @class = "form-control", id = "arrSearch", placeholder = "Ankomst" })</td>
-                    </tr>
-                </table>
-                <table class="col-md-3">
-                    <tr>
-                        <th>Når</th>
-                    </tr>
-                    <tr>
-                        <td>@Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepick form-control col-md-3" } })</td>
-                    </tr>
-                </table>        
-
-                 <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
-                 <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
-                 <div class="col-md-12">
-                     <br />
-                     <input type="submit" value="Søk" class="btn btn-primary" id="searchButton" />
-                 </div>
+            <div class="form-inline ui-widget datepicker" >
+                <div class="form-group">
+                    <label for="depSearch">Fra</label>
+                    @Html.TextBox("departureSearch", null, new { @class = "form-control", id = "depSearch", placeholder = "Avgang" })
+                </div>
+                <div class="form-group">
+                    <label for="arrSearch">Til</label>
+                    @Html.TextBox("arrivalSearch", null, new { @class = "form-control", id = "arrSearch", placeholder = "Ankomst" })
+                </div>
+                <div class="form-group">
+                    <label>Når</label>
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                    <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
+                    <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
+                <div class=" form-group">
+                    <input type="submit" value="Søk" class="btn btn-primary btn-lg" id="searchButton" />
+                </div>
             </div>
-
-        </div>
     }
 
 

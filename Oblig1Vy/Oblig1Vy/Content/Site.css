@@ -23,11 +23,11 @@ textarea {
     max-width: 280px;
 }
 
-/*#searchButton {
+.btn {
     border: none;
-    background-color: #E57AFF;
+    margin: 1em;
 }
-
+/*
 #searchButton:hover {
     background-color: lightgrey;
 }
