@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Home") class="navbar-brand">
+                <a href="@Url.Action("Index", "Home",new { area = "" })" class="">
                     <img src="~/Content/vy_logo.png" title="Vy-logo" style="height:4em; width:inherit;"/>
                 </a>
                 @*Html.ActionLink("Vy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
@@ -34,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year Tôgbanen</p>
+            <p>&copy; @DateTime.Now.Year Reis med toget</p>
         </footer>
     </div>
 
