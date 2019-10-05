@@ -67,11 +67,13 @@ namespace Oblig1Vy.Controllers
                 //    .Where(a => a.Schedules.Any(b => b.StationId == travelSearch.DepartureId) && a.Schedules.Any(b => b.StationId == travelSearch.ArrivalId))
                 //    .ToList();
 
+                ViewBag.TicketDate = travelSearch.Date;
+
                 var trips = ois.SelectMany(a => a.Trips)
                     .Where(a => a.Schedules.Any(b => b.StationId == travelSearch.DepartureId) && a.Schedules.Any(b => b.StationId == travelSearch.ArrivalId))
                     .ToList();
 
-                List<DepartureTimeVm> departureTimeList = new List<DepartureTimeVm>();
+                var departureTimeList = new List<DepartureTimeVm>();
 
                 foreach (var trip in trips)
                 {
@@ -93,8 +95,10 @@ namespace Oblig1Vy.Controllers
                         {
                             TripId = trip.Id,
                             DepartureStationId = travelSearch.DepartureId,
+                            DepartureStation = departureSchedule.Station.StationName,
                             DepartureStationTime = departureSchedule.DepartureTime.Value,
                             ArrivalStationId = travelSearch.ArrivalId,
+                            ArrivalStation = arrivalSchedule.Station.StationName,
                             ArrivalStationTime = arrivalSchedule.ArrivalTime.Value,
                             Stops = stops
                         });
@@ -103,6 +107,46 @@ namespace Oblig1Vy.Controllers
 
 
                 return View(departureTimeList);
+            }
+        }
+        
+        [HttpPost]
+        public ActionResult DepartureTimes(TicketVm ticket)
+        {
+            var travelTicket = new Ticket
+            {
+                ArrivalStationId = ticket.ArrivalStationId,
+                DepartureStationId = ticket.DepartureStationId,
+                TripId = ticket.TripId,
+                JourneyDate = ticket.Date
+            };
+
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                db.Tickets.Add(travelTicket);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("TicketSummary", new { id = travelTicket.Id });
+        }
+
+        public ActionResult TicketSummary(int id)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var ticket = db.Tickets.Find(id);
+
+                var departureTime = ticket.Trip.Schedules.SingleOrDefault(a => a.StationId == ticket.DepartureStationId);
+
+                var ticketSummaryVm = new TicketSummaryVm
+                {
+                    ArrivalStation = ticket.ArrivalStation.StationName,
+                    DepartureStation = ticket.DepartureStation.StationName,
+                    LineName = ticket.Trip.Line.LineName,
+                    TicketDateAndTime = ticket.JourneyDate.Date.Add(departureTime.DepartureTime.Value)
+                };
+
+                return View(ticketSummaryVm);
             }
         }
 

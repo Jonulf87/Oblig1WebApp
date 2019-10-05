@@ -139,6 +139,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AutoCompleteSearchVm.cs" />
     <Compile Include="ViewModels\DepartureTimeVm.cs" />
+    <Compile Include="ViewModels\TicketSummaryVm.cs" />
+    <Compile Include="ViewModels\TicketVm.cs" />
     <Compile Include="ViewModels\TravelSearchVm.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +281,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DepartureTimes.cshtml" />
+    <Content Include="Views\Home\TicketSummary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

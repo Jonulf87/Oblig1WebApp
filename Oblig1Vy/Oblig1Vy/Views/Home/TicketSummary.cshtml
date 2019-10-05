@@ -1,0 +1,48 @@
+﻿@model Oblig1Vy.ViewModels.TicketSummaryVm
+
+@{
+    ViewBag.Title = "TicketSummary";
+}
+
+<h2>Din billett</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalStation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalStation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketDateAndTime)
+        </dt>
+
+        <dd>
+            @Model.TicketDateAndTime.ToString("dd/MM/yyyy HH:mm")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Tilbake til start", "Index")
+</p>

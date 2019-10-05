@@ -4,66 +4,64 @@
     ViewBag.Title = "DepartureTimes";
 }
 
-<h2>DepartureTimes</h2>
+<h2>Velg avgang</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TripId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureStation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureStationId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartureStationTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalStation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalStationId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArrivalStationTime)
-        </th>
-        <th></th>
-    </tr>
+@using (Html.BeginForm())
+{
+    <table class="table">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TripId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureStationId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartureStationTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalStation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalStationId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArrivalStationTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureStation)<br />
+                    <p>@item.DepartureStationTime.ToString("hh\\:mm")</p>
+                </td>
+            </tr>
+            <tr class="hidden" id="stopsDisplay">
+                <td>
+                    @foreach (var station in Model)
+                    {
+                        foreach (var stop in station.Stops)
+                        {
+                            @Html.DisplayFor(modelItem => stop.Name)<br />
+                            <p>@stop.DepartureTime.ToString("hh\\:mm")</p>
+                        }
+                    }
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalStation)<br />
+                    <p>@item.ArrivalStationTime.ToString("hh\\:mm")</p>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="btn" value="Velg reise" />
+                    <input type="hidden" name="tripId" value="@item.TripId" />
+                    <input type="hidden" name="date" value="@ViewBag.TicketDate.ToString("yyyy-MM-dd HH:mm:ss")" />
+                    <input type="hidden" name="departureStationId" value="@item.DepartureStationId" />
+                    <input type="hidden" name="arrivalStationId" value="@item.ArrivalStationId" />
+                </td>
+            </tr>
+        }
+
+    </table>
 }
 
-</table>
+    @section scripts
+{
+        <script type="text/javascript">
+
+            $(function () {
+                $("#stopsDisplay").click()
+            })
+
+
+        </script>
+    }
