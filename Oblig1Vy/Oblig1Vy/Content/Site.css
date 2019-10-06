@@ -37,4 +37,17 @@ textarea {
     border-radius: 5px 5px 5px 5px;
     margin: auto 5px;
 }*/
-.navbar
+
+.departure .departureInfo {
+    padding-top: 10px;
+}
+
+.departure .departureInfo:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.departure .stopsDisplay {
+    padding-top: 10px;
+    padding-left: 15px;
+}

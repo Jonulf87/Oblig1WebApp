@@ -5,63 +5,64 @@
 }
 
 <h2>Velg avgang</h2>
-
+<br />
 @using (Html.BeginForm())
 {
-    <table class="table">
+    foreach (var item in Model)
+    {
+        <div class="row departure" style="border-bottom: 1px solid #666">
+            <div class="departureInfo">
+                <div class="col-sm-2 col-xs-4">
+                    <span>
+                        @Html.DisplayFor(modelItem => item.DepartureStation)<br />
+                        @item.DepartureStationTime.ToString("hh\\:mm")
+                    </span>
+                </div>
 
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartureStation)<br />
-                    <p>@item.DepartureStationTime.ToString("hh\\:mm")</p>
-                </td>
-            </tr>
-            <tr class="hidden" id="stopsDisplay">
-                <td>
-                    @foreach (var station in Model)
-                    {
-                        foreach (var stop in station.Stops)
-                        {
-                            @Html.DisplayFor(modelItem => stop.Name)<br />
-                            <p>@stop.DepartureTime.ToString("hh\\:mm")</p>
-                        }
-                    }
-                </td>
-            </tr>
+                <div class="col-sm-2 col-xs-4">
+                    <span>
+                        @Html.DisplayFor(modelItem => item.ArrivalStation)<br />
+                        @item.ArrivalStationTime.ToString("hh\\:mm")
+                    </span>
+                </div>
 
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ArrivalStation)<br />
-                    <p>@item.ArrivalStationTime.ToString("hh\\:mm")</p>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" class="btn" value="Velg reise" />
+                <div class="col-sm-8 col-xs-4 text-right">
                     <input type="hidden" name="tripId" value="@item.TripId" />
                     <input type="hidden" name="date" value="@ViewBag.TicketDate.ToString("yyyy-MM-dd HH:mm:ss")" />
                     <input type="hidden" name="departureStationId" value="@item.DepartureStationId" />
                     <input type="hidden" name="arrivalStationId" value="@item.ArrivalStationId" />
-                </td>
-            </tr>
-        }
+                    <input type="submit" class="btn btn-sm chooseButton" value="Velg reise" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
 
-    </table>
+            <div class="stopsDisplay" style="display:none">
+                @foreach (var station in Model)
+                {
+                    foreach (var stop in station.Stops)
+                    {
+                        @Html.DisplayFor(modelItem => stop.Name)<br />
+                        <p>@stop.DepartureTime.ToString("hh\\:mm")</p>
+                    }
+                }
+            </div>
+        </div>
+        
+
+    }
 }
 
     @section scripts
 {
         <script type="text/javascript">
-
-            $(function () {
-                $("#stopsDisplay").click()
-            })
-
-
+            $(function () { 
+                $(".departure").click(function () {
+                    $(this).children(".stopsDisplay").first().toggle();
+                });
+                $(".chooseButton").click(function (event) {
+                    event.stopPropagation();
+                });
+            });
         </script>
     }
