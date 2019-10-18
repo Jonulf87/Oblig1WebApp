@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Oblig1Vy
+namespace Oblig1Vy.MVC
 {
     public class BundleConfig
     {

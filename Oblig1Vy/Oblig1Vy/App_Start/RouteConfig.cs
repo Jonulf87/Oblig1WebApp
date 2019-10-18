@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Oblig1Vy
+namespace Oblig1Vy.MVC
 {
     public class RouteConfig
     {
