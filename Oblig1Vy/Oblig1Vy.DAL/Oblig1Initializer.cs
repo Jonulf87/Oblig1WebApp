@@ -1,4 +1,6 @@
-﻿using Oblig1Vy.DAL.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Oblig1Vy.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,10 +10,25 @@ using System.Web;
 
 namespace Oblig1Vy.DAL
 {
-    public class Oblig1Initializer : DropCreateDatabaseIfModelChanges<Oblig1Context>
+    public class Oblig1Initializer : DropCreateDatabaseAlways<Oblig1Context>
     {
         protected override void Seed(Oblig1Context context)
-         {
+        {
+            var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!roleManager.RoleExists("admins"))
+            {
+                roleManager.Create(new IdentityRole("admins"));
+            }
+
+            if (!userManager.Users.Any(a => a.UserName == "admin"))
+            {
+                userManager.Create(new IdentityUser("admin"), "hemmelig");
+                var user = userManager.FindByName("admin");
+                userManager.AddToRole(user.Id, "admins");
+            }
+
             var stations = new List<Station>
             {
                 new Station() { StationName = "Stavanger" }, //0

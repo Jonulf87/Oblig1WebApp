@@ -1,4 +1,5 @@
-﻿using Oblig1Vy.DAL.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Oblig1Vy.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,9 +7,10 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
+
 namespace Oblig1Vy.DAL
 {
-    public class Oblig1Context : DbContext
+    public class Oblig1Context : IdentityDbContext<IdentityUser>
     {
         public Oblig1Context() : base("Oblig1Context")
         {
@@ -17,6 +19,7 @@ namespace Oblig1Vy.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
         
