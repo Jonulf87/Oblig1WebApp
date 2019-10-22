@@ -65,5 +65,25 @@ namespace Oblig1Vy.Controllers
 
             return RedirectToAction("Login");
         }
+
+        public ActionResult CreateStation()
+        {
+            return View();
+        }
+
+        public ActionResult ReadStation()
+        {
+            return View();
+        }
+
+        public ActionResult UpdateStation()
+        {
+            return View();
+        }
+
+        public ActionResult DeleteStation()
+        {
+            return View();
+        }
     }
 }

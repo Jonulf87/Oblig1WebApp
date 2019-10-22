@@ -19,8 +19,9 @@ namespace Oblig1Vy.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
         }
         
 
