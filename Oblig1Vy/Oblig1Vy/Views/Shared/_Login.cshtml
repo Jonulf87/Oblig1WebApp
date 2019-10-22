@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Logg ut", "Logout", "Admin", new { area = "" }, new { @class = "pull-right" })
+                
+            </li>
+            <li>
+                @Html.ActionLink("Admin-sider", "Index", "Admin", new { area = "" }, new { @class = "Pull-right" })
+            </li>
+        </ul>
+
+    }
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Logg inn", "Login", "Admin", new { area = "" }, new { @class = "pull-right" })
+            </li>
+        </ul>
+
+    }
+    
+}
+
+
+
+

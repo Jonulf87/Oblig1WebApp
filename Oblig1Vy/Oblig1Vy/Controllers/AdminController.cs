@@ -25,6 +25,10 @@ namespace Oblig1Vy.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
@@ -52,6 +56,14 @@ namespace Oblig1Vy.Controllers
             ModelState.AddModelError("", "Feil brukernavn eller passord.");
 
             return View(login);
+        }
+
+        public ActionResult Logout()
+        {
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            authManager.SignOut();
+
+            return RedirectToAction("Login");
         }
     }
 }
