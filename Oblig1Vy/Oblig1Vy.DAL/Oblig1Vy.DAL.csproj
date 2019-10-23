@@ -66,6 +66,7 @@
     <Compile Include="Oblig1Context.cs" />
     <Compile Include="Oblig1Initializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StationRepository.cs" />
     <Compile Include="TicketRepository.cs" />
     <Compile Include="TripRepository.cs" />
   </ItemGroup>
