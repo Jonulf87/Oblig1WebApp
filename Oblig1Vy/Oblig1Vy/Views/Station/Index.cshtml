@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Oblig1Vy.Model.ViewModels.StationListVm>
+﻿@model IEnumerable<Oblig1Vy.Model.ViewModels.StationVm>
 
 @{
     ViewBag.Title = "Index";
@@ -23,8 +23,8 @@
             @Html.DisplayFor(modelItem => item.StationName)
         </td>
         <td>
-            @Html.ActionLink("Endre", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Endre", "Edit", new { id=item.StationId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StationId })
         </td>
     </tr>
 }

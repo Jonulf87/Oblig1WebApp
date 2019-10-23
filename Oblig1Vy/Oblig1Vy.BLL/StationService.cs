@@ -11,13 +11,19 @@ namespace Oblig1Vy.BLL
 {
     public class StationService
     {
-        public List<StationListVm> GetStations()
+        public List<StationVm> GetStations()
         {
             var stationRepository = new StationRepository();
             var stations = stationRepository.GetStations();
 
             return stations;
 
+        }
+
+        public void UpdateStation(StationVm station)
+        {
+            var stationRepo = new StationRepository();
+            stationRepo.UpdateStation(station);
         }
     }
 }

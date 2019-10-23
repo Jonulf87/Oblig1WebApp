@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Oblig1Vy.BLL;
+using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.Controllers
 {
@@ -23,8 +24,11 @@ namespace Oblig1Vy.Controllers
             return View();
         }
 
-        public ActionResult UpdateStation()
+        public ActionResult UpdateStation(StationVm station)
         {
+            var stationSer = new StationService();
+            stationSer.UpdateStation(station);
+
             return View();
         }
 
