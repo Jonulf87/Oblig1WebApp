@@ -23,18 +23,46 @@ namespace Oblig1Vy.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult AddStation(StationVm station)
+        {
+            var stationService = new StationService();
+            stationService.AddStation(station);
 
+            return RedirectToAction("Index");
+        }
+        
+        public ActionResult UpdateStation(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var stationService = new StationService();
+            var station = stationService.GetStation(id.Value);
+
+            return View(station);
+        }
+
+        [HttpPost]
         public ActionResult UpdateStation(StationVm station)
         {
             var stationSer = new StationService();
             stationSer.UpdateStation(station);
 
-            return View();
+            return RedirectToAction("Index");
         }
 
-        public ActionResult DeleteStation()
+        public ActionResult DeleteStation(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var stationService = new StationService();
+            stationService.DeleteStation(id.Value);
+
+            return RedirectToAction("Index");
         }
     }
 }

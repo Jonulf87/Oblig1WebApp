@@ -155,6 +155,8 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LineController.cs" />
+    <Compile Include="Controllers\OperationalIntervalController.cs" />
     <Compile Include="Controllers\StationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,9 +305,15 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Station\Index.cshtml" />
     <Content Include="Views\Station\AddStation.cshtml" />
+    <Content Include="Views\Station\UpdateStation.cshtml" />
+    <Content Include="Views\Station\DeleteStation.cshtml" />
+    <Content Include="Views\OperationalInterval\Index.cshtml" />
+    <Content Include="Views\OperationalInterval\UpdateOis.cshtml" />
+    <Content Include="Views\OperationalInterval\AddOis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Line\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

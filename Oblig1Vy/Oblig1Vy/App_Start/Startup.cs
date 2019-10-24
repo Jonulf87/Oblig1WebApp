@@ -33,7 +33,7 @@ namespace Oblig1Vy
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Admin/Login"),
                 SlidingExpiration = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(5)
+                ExpireTimeSpan = TimeSpan.FromMinutes(60)
             });
         }
     }

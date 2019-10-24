@@ -11,6 +11,13 @@ namespace Oblig1Vy.BLL
 {
     public class StationService
     {
+        public StationVm GetStation(int id)
+        {
+            var stationRepo = new StationRepository();
+            var station = stationRepo.GetStation(id);
+
+            return station;
+        }
         public List<StationVm> GetStations()
         {
             var stationRepository = new StationRepository();
@@ -24,6 +31,20 @@ namespace Oblig1Vy.BLL
         {
             var stationRepo = new StationRepository();
             stationRepo.UpdateStation(station);
+        }
+
+        public int AddStation(StationVm station)
+        {
+            var stationRepo = new StationRepository();
+            var stationId = stationRepo.AddStation(station);
+
+            return stationId;
+        }
+
+        public void DeleteStation(int? id)
+        {
+            var stationRepo = new StationRepository();
+            stationRepo.DeleteStation(id.Value);
         }
     }
 }

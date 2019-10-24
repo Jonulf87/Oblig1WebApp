@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Oblig1Vy.DAL.Models
+namespace Oblig1Vy.Model.ViewModels
 {
-    public class OperationalInterval
+    public class OperationalIntervalVm
     {
         public int Id { get; set; }
-        
-        //Navnet på rutetilbudet f.eks. sommerruter eller vinterruter
-        [Display(Name = "Operasjonsintervall")]
+        [Display(Name = "Intervallnavn")]
         public string Name { get; set; }
+        [DataType(DataType.Date)]
         [Display(Name = "Startdato")]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
         [Display(Name = "Sluttdato")]
         public DateTime EndDate { get; set; }
         [Display(Name = "Mandag")]
@@ -31,7 +32,5 @@ namespace Oblig1Vy.DAL.Models
         public bool Saturday { get; set; }
         [Display(Name = "Søndag")]
         public bool Sunday { get; set; }
-        public virtual List<Trip> Trips { get; set; }
-
     }
 }

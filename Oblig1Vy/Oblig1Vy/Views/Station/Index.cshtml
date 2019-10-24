@@ -4,18 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Stasjonsoversikt</h2>
 
 <p>
     @Html.ActionLink("Opprett ny stasjon", "AddStation", "Station")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StationName)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StationName)
+            </th>
+            <th>Handlinger</th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
     <tr>
@@ -23,8 +26,8 @@
             @Html.DisplayFor(modelItem => item.StationName)
         </td>
         <td>
-            @Html.ActionLink("Endre", "Edit", new { id=item.StationId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StationId })
+            @Html.ActionLink("Endre", "UpdateStation", "Station", new { id=item.StationId }, null) |
+            @Html.ActionLink("Slett", "DeleteStation", "Station", new { id=item.StationId }, null)
         </td>
     </tr>
 }
