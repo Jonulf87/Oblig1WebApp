@@ -19,7 +19,6 @@ namespace Oblig1Vy.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
@@ -31,6 +30,6 @@ namespace Oblig1Vy.DAL
         public DbSet<Station> Stations { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Trip> Trips { get; set; }
-
+        public DbSet<AuditLog> AuditLogs { get; set; }
     }
 }

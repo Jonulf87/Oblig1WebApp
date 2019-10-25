@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LineRepository.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\OperationalInterval.cs" />
     <Compile Include="Models\Schedule.cs" />

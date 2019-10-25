@@ -12,6 +12,8 @@ namespace Oblig1Vy.Model.ViewModels
         public string LineName { get; set; }
         public int DepartureStationId { get; set; }
         public int ArrivalStationId { get; set; }
+        public string DepartureStation { get; set; }
+        public string ArrivalStation { get; set; }
 
     }
 }

@@ -1,0 +1,72 @@
+﻿@model Oblig1Vy.Model.ViewModels.TripVm
+
+@{
+    ViewBag.Title = "DeleteTrip";
+}
+
+<h2>DeleteTrip</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TripVm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationalIntervalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationalIntervalId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationalIntervalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationalIntervalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

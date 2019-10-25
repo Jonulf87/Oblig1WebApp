@@ -158,6 +158,7 @@
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\OperationalIntervalController.cs" />
     <Compile Include="Controllers\StationController.cs" />
+    <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,10 +311,14 @@
     <Content Include="Views\OperationalInterval\Index.cshtml" />
     <Content Include="Views\OperationalInterval\UpdateOis.cshtml" />
     <Content Include="Views\OperationalInterval\AddOis.cshtml" />
+    <Content Include="Views\Line\Index.cshtml" />
+    <Content Include="Views\Trip\Index.cshtml" />
+    <Content Include="Views\Trip\Addtrip.cshtml" />
+    <Content Include="Views\Trip\UpdateTrip.cshtml" />
+    <Content Include="Views\Trip\DeleteTrip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Line\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

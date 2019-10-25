@@ -33,6 +33,42 @@ namespace Oblig1Vy.BLL
 
             return stationNames;
         }
+
+        public TripVm GetTrip(int id)
+        {
+            var tripRepo = new TripRepository();
+            var trip = tripRepo.GetTrip(id);
+
+            return trip;
+        }
+
+        public List<TripVm> GetTrips()
+        {
+            var tripRepo = new TripRepository();
+            var tripList = tripRepo.GetTrips();
+
+            return tripList;
+        }
+
+        public void UpdateTrip(TripVm trip, string userName)
+        {
+            var tripRepo = new TripRepository();
+            tripRepo.UpdateTrip(trip, userName);   
+        }
+
+        public int AddTrip(TripVm trip, string userName)
+        {
+            var tripRepo = new TripRepository();
+            var tripId = tripRepo.AddTrip(trip, userName);
+
+            return tripId;
+        }
+
+        public void DeleteTrip(int id, string userName)
+        {
+            var tripRepo = new TripRepository();
+            tripRepo.DeleteTrip(id, userName);
+        }
         
     }
 }

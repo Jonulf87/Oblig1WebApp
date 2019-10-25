@@ -19,8 +19,12 @@ namespace Oblig1Vy.DAL
                     Id = a.Id,
                     LineName = a.LineName,
                     DepartureStationId = a.DepartureId,
-                    ArrivalStationId = a.ArrivalId
-                }).FirstOrDefault();
+                    ArrivalStationId = a.ArrivalId,
+                    DepartureStation = a.Departure.StationName,
+                    ArrivalStation = a.Arrival.StationName
+
+                    
+                }).SingleOrDefault();
 
                 return line;
             }
@@ -35,10 +39,55 @@ namespace Oblig1Vy.DAL
                     Id = a.Id,
                     LineName = a.LineName,
                     DepartureStationId = a.DepartureId,
-                    ArrivalStationId = a.ArrivalId
+                    ArrivalStationId = a.ArrivalId,
+                    DepartureStation = a.Departure.StationName,
+                    ArrivalStation = a.Arrival.StationName
                 }).ToList();
 
                 return linesList;
+            }
+            
+        }
+
+        public void UpdateLine(LineVm lineEdit)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var lineDb = db.Lines.Where(a => a.Id == lineEdit.Id).SingleOrDefault();
+
+                lineDb.LineName = lineEdit.LineName;
+                lineDb.DepartureId = lineEdit.DepartureStationId;
+                lineDb.ArrivalId = lineEdit.ArrivalStationId;
+
+                db.SaveChanges();
+            }
+        }
+
+        public int AddLine(LineVm newLine)
+        {
+            var line = new Line
+            {
+                LineName = newLine.LineName,
+                DepartureId = newLine.DepartureStationId,
+                ArrivalId = newLine.ArrivalStationId
+            };
+
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                db.Lines.Add(line);
+                db.SaveChanges();
+            }
+
+            return line.Id;
+        }
+
+        public void DeleteLine(int? id)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var lineRemove = db.Lines.SingleOrDefault(a => a.Id == id.Value);
+                db.Lines.Remove(lineRemove);
+                db.SaveChanges();
             }
         }
     }

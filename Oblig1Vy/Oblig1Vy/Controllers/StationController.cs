@@ -11,7 +11,6 @@ namespace Oblig1Vy.Controllers
     [Authorize(Roles = "admins")]
     public class StationController : Controller
     {
-        
         public ActionResult Index()
         {
             var stationService = new StationService();
