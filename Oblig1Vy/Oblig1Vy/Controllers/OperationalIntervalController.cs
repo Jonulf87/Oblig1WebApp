@@ -8,9 +8,12 @@ using System.Web.Mvc;
 
 namespace Oblig1Vy.Controllers
 {
+    [Authorize(Roles = "admins")]
     public class OperationalIntervalController : Controller
     {
         
+
+        [HttpGet]
         public ActionResult Index()
         {
             var oisService = new OperationalIntervalService();
@@ -19,12 +22,14 @@ namespace Oblig1Vy.Controllers
             return View(oisList);
         }
 
+        [HttpGet]
         public ActionResult AddOis()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddOis(OperationalIntervalVm ois)
         {
             var oisService = new OperationalIntervalService();
@@ -33,6 +38,7 @@ namespace Oblig1Vy.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public ActionResult UpdateOis(int? id)
         {
             if (id == null)
@@ -46,6 +52,7 @@ namespace Oblig1Vy.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateOis(OperationalIntervalVm oisVm)
         {
             var oisService = new OperationalIntervalService();
@@ -54,17 +61,29 @@ namespace Oblig1Vy.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public ActionResult DeleteOis(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
+
             var oisService = new OperationalIntervalService();
-            oisService.DeleteOis(id.Value);
+            var oisDelete = oisService.GetOperationalInterval(id.Value);
+
+            return View("Index");
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteOis(int id)
+        {
+            var oisService = new OperationalIntervalService();
+            oisService.DeleteOis(id);
 
             return RedirectToAction("Index");
-
         }
     }
 }

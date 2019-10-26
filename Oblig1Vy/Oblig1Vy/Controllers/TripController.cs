@@ -8,9 +8,11 @@ using System.Web.Mvc;
 
 namespace Oblig1Vy.Controllers
 {
+    [Authorize(Roles = "admins")]
     public class TripController : Controller
-    {
-        [Authorize(Roles = "admins")]
+    {        
+
+        [HttpGet]
         public ActionResult Index()
         {
             var tripService = new TripService();
@@ -19,12 +21,14 @@ namespace Oblig1Vy.Controllers
             return View(tripList);
         }
 
+        [HttpGet]
         public ActionResult AddTrip()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Addtrip(TripVm trip)
         {
             var tripService = new TripService();
@@ -33,6 +37,7 @@ namespace Oblig1Vy.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public ActionResult UpdateTrip(int? id)
         {
             if (id == null)
@@ -47,6 +52,7 @@ namespace Oblig1Vy.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateTrip(TripVm trip)
         {
             var tripService = new TripService();
@@ -55,6 +61,7 @@ namespace Oblig1Vy.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public ActionResult DeleteTrip(int? id)
         {
             if (id == null)
@@ -63,7 +70,17 @@ namespace Oblig1Vy.Controllers
             }
 
             var tripService = new TripService();
-            tripService.DeleteTrip(id.Value, User.Identity.Name);
+            var tripDelete = tripService.GetTrip(id.Value);
+
+            return View(tripDelete);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTrip(int id)
+        {
+            var tripService = new TripService();
+            tripService.DeleteTrip(id, User.Identity.Name);
 
             return RedirectToAction("Index");
         }

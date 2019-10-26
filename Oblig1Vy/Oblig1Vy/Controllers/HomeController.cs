@@ -7,20 +7,27 @@ namespace Oblig1Vy.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(TravelSearchVm travelSearch)
         {
             return RedirectToAction("DepartureTimes", travelSearch);
         }
 
+        [HttpGet]
         public ActionResult DepartureTimes(TravelSearchVm travelSearch) //Inneholder avgangsstasjon ID, ankomststasjon ID og dato for valgt tur/trip
         {
-            ViewBag.TicketDate = travelSearch.Date;
+            if (travelSearch != null)
+            {
+                ViewBag.TicketDate = travelSearch.Date;
+            }
+            
 
             var tripService = new TripService();
             var departureTimeList = tripService.GetDepartureTimes(travelSearch);
@@ -29,6 +36,7 @@ namespace Oblig1Vy.MVC.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DepartureTimes(TicketVm ticket)
         {
             var ticketService = new TicketService();
@@ -37,6 +45,7 @@ namespace Oblig1Vy.MVC.Controllers
             return RedirectToAction("TicketSummary", new { id = ticketId });
         }
 
+        [HttpGet]
         public ActionResult TicketSummary(int id)
         {
             var ticketService = new TicketService();
@@ -45,6 +54,7 @@ namespace Oblig1Vy.MVC.Controllers
             return View(ticketSummary);
         }
 
+        [HttpGet]
         public JsonResult AutoComplete(string term)
         {
             var tripService = new TripService();

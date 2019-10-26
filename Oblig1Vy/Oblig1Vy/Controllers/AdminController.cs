@@ -16,12 +16,14 @@ namespace Oblig1Vy.Controllers
     [Authorize(Roles = "admins")]
     public class AdminController : Controller
     {
-   
+
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -34,6 +36,7 @@ namespace Oblig1Vy.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginVm login)
         {
             if (ModelState.IsValid)
@@ -58,6 +61,7 @@ namespace Oblig1Vy.Controllers
             return View(login);
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             var authManager = HttpContext.GetOwinContext().Authentication;

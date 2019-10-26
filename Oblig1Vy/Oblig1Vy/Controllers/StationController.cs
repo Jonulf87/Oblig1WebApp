@@ -11,6 +11,7 @@ namespace Oblig1Vy.Controllers
     [Authorize(Roles = "admins")]
     public class StationController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             var stationService = new StationService();
@@ -18,11 +19,13 @@ namespace Oblig1Vy.Controllers
             return View(stationsList);
         }
 
+        [HttpGet]
         public ActionResult AddStation()
         {
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddStation(StationVm station)
         {
             var stationService = new StationService();
@@ -30,7 +33,8 @@ namespace Oblig1Vy.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
+        [HttpGet]
         public ActionResult UpdateStation(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace Oblig1Vy.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateStation(StationVm station)
         {
             var stationSer = new StationService();
@@ -52,6 +57,8 @@ namespace Oblig1Vy.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpGet]
         public ActionResult DeleteStation(int? id)
         {
             if (id == null)
@@ -66,6 +73,7 @@ namespace Oblig1Vy.Controllers
 
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteStation(int id)
         {
             var stationService = new StationService();
