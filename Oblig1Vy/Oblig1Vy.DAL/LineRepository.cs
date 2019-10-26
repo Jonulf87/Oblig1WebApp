@@ -75,7 +75,7 @@ namespace Oblig1Vy.DAL
             using (Oblig1Context db = new Oblig1Context())
             {
                 db.Lines.Add(line);
-                db.SaveChanges();
+                    db.SaveChanges();
             }
 
             return line.Id;

@@ -40,10 +40,10 @@ namespace Oblig1Vy.BLL
             return oisId;
         }
 
-        public void DeleteOis(int? id)
+        public void DeleteOis(int id)
         {
             var oisRepo = new OperationalIntervalRepository();
-            oisRepo.DeleteOis(id.Value);
+            oisRepo.DeleteOis(id);
         }
     }
 }

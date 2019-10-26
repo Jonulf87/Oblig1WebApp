@@ -102,11 +102,11 @@ namespace Oblig1Vy.DAL
             return ois.Id;
         }
 
-        public void DeleteOis(int? id)
+        public void DeleteOis(int id)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
-                var oisRemove = db.OperationalIntervals.FirstOrDefault(a => a.Id == id.Value);
+                var oisRemove = db.OperationalIntervals.FirstOrDefault(a => a.Id == id);
                 db.OperationalIntervals.Remove(oisRemove);
                 db.SaveChanges();
             }

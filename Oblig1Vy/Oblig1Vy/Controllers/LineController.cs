@@ -24,6 +24,8 @@ namespace Oblig1Vy.Controllers
         [HttpGet]
         public ActionResult AddLine()
         {
+            SetStationsViewBag();
+
             return View();
         }
 
@@ -31,6 +33,12 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddLine(LineVm line)
         {
+            if (!ModelState.IsValid)
+            {
+                SetStationsViewBag();
+                return View(line);
+            }
+
             var lineSer = new LineService();
             lineSer.AddLine(line);
 
@@ -45,6 +53,8 @@ namespace Oblig1Vy.Controllers
                 return RedirectToAction("Index");
             }
 
+            SetStationsViewBag();
+
             var lineSer = new LineService();
             var line = lineSer.GetLine(id.Value);
 
@@ -55,6 +65,12 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateLine(LineVm line)
         {
+            if (!ModelState.IsValid)
+            {
+                SetStationsViewBag();
+                return View(line);
+            }
+
             var lineSer = new LineService();
             lineSer.UpdateLine(line);
 
@@ -79,22 +95,22 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteLine(int id)
         {
-            
-
-            var lineSer = new LineService();
+           var lineSer = new LineService();
             lineSer.DeleteLine(id);
 
             return RedirectToAction("Index");
         }
 
-
-        [HttpGet]
-        public JsonResult AutoComplete(string term)
+        private void SetStationsViewBag()
         {
-            var tripService = new TripService();
-            var stations = tripService.GetStationsByName(term);
+            var stationService = new StationService();
 
-            return Json(stations, JsonRequestBehavior.AllowGet);
+            ViewBag.Stations = stationService.GetStations().OrderBy(a => a.StationName)
+                .Select(a => new SelectListItem
+                {
+                    Value = a.StationId.ToString(),
+                    Text = a.StationName
+                }).ToList();
         }
     }
 }

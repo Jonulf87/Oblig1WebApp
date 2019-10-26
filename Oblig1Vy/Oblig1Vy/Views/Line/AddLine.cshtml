@@ -23,22 +23,20 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DepartureStation, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DepartureStationId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DepartureStation, new { htmlAttributes = new { @class = "form-control", id = "depSearch"  } })
-                @Html.ValidationMessageFor(model => model.DepartureStation, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.DepartureStationId, (List<SelectListItem>)ViewBag.Stations, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartureStationId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ArrivalStation, htmlAttributes: new { @class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.ArrivalStationId, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ArrivalStation, new { htmlAttributes = new { @class = "form-control", id = "arrSearch"  } })
-                @Html.ValidationMessageFor(model => model.ArrivalStation, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.ArrivalStationId, (List<SelectListItem>)ViewBag.Stations, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ArrivalStationId, "", new { @class = "text-danger" })
             </div>
         </div>
-            <input type="hidden" name="DepartureId" id="depSearch-id" value="" />
-            <input type="hidden" name="ArrivalId" id="arrSearch-id" value="" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -51,54 +49,3 @@
 <div>
     @Html.ActionLink("Tilbake", "Index")
 </div>
-
-@section scripts {
-    <script type="text/javascript">
-
-
-
-        $(function () {
-
-            $("#depSearch").autocomplete({
-                source: "@Url.Action("AutoComplete")",
-
-                focus: function(event, ui) {
-                    $("#depSearch").val(ui.item.StationName);
-
-                    return false;
-                },
-
-                select: function(event, ui) {
-                    $("#depSearch").val(ui.item.StationName);
-                    $("#depSearch-id").val(ui.item.StationId);
-
-                    return false;
-                }
-            }).autocomplete("instance")._renderItem = function(ul, item) {
-                return $("<li>")
-                    .append(item.StationName)
-                    .appendTo(ul);
-                };
-            $("#arrSearch").autocomplete({
-                source: "@Url.Action("AutoComplete")",
-
-                focus: function(event, ui) {
-                    $("#arrSearch").val(ui.item.StationName);
-
-                    return false;
-                },
-
-                select: function(event, ui) {
-                    $("#arrSearch").val(ui.item.StationName);
-                    $("#arrSearch-id").val(ui.item.StationId);
-
-                    return false;
-                }
-            }).autocomplete("instance")._renderItem = function(ul, item) {
-                return $("<li>")
-                    .append(item.StationName)
-                    .appendTo(ul);
-                };
-        });
-
-    </script>

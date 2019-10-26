@@ -72,7 +72,7 @@ namespace Oblig1Vy.Controllers
             var oisService = new OperationalIntervalService();
             var oisDelete = oisService.GetOperationalInterval(id.Value);
 
-            return View("Index");
+            return View(oisDelete);
 
         }
 
