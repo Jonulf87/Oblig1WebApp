@@ -12,83 +12,58 @@ namespace Oblig1Vy.DAL
     {
         public LineVm GetLine(int id)
         {
-            using (Oblig1Context db = new Oblig1Context())
+            var line = new LineVm
             {
-                var line = db.Lines.Where(a => a.Id == id).Select(a => new LineVm
-                {
-                    Id = a.Id,
-                    LineName = a.LineName,
-                    DepartureStationId = a.DepartureId,
-                    ArrivalStationId = a.ArrivalId,
-                    DepartureStation = a.Departure.StationName,
-                    ArrivalStation = a.Arrival.StationName
-
-
-                }).SingleOrDefault();
-
-                return line;
-            }
+                Id = 1,
+                LineName = "Stavanger - Oslo",
+                DepartureStationId = 0,
+                ArrivalStationId = 9,
+                DepartureStation = "Stavanger",
+                ArrivalStation = "Oslo"
+            };
+            return line;
         }
 
         public List<LineVm> GetLines()
         {
-            using (Oblig1Context db = new Oblig1Context())
+            var LinesList = new List<LineVm>();
+            var Lines = new LineVm
             {
-                var linesList = db.Lines.Select(a => new LineVm
-                {
-                    Id = a.Id,
-                    LineName = a.LineName,
-                    DepartureStationId = a.DepartureId,
-                    ArrivalStationId = a.ArrivalId,
-                    DepartureStation = a.Departure.StationName,
-                    ArrivalStation = a.Arrival.StationName
-                }).ToList();
+                Id = 1,
+                LineName = "Stavanger - Oslo",
+                DepartureStationId = 0,
+                ArrivalStationId = 9,
+                DepartureStation = "Stavanger",
+                ArrivalStation = "Oslo"
+            };
+            LinesList.Add(Lines);
+            LinesList.Add(Lines);
+            LinesList.Add(Lines);
 
-                return linesList;
-            }
+            return LinesList;
 
         }
 
         public void UpdateLine(LineVm lineEdit)
         {
-            using (Oblig1Context db = new Oblig1Context())
-            {
-                var lineDb = db.Lines.Where(a => a.Id == lineEdit.Id).SingleOrDefault();
 
-                lineDb.LineName = lineEdit.LineName;
-                lineDb.DepartureId = lineEdit.DepartureStationId;
-                lineDb.ArrivalId = lineEdit.ArrivalStationId;
-
-                db.SaveChanges();
-            }
         }
 
         public int AddLine(LineVm newLine)
         {
             var line = new Line
             {
-                LineName = newLine.LineName,
-                DepartureId = newLine.DepartureStationId,
-                ArrivalId = newLine.ArrivalStationId
+                LineName = "Oslo - Bergen",
+                DepartureId = 9,
+                ArrivalId = 18
             };
-
-            using (Oblig1Context db = new Oblig1Context())
-            {
-                db.Lines.Add(line);
-                db.SaveChanges();
-            }
 
             return line.Id;
         }
 
         public void DeleteLine(int? id)
         {
-            using (Oblig1Context db = new Oblig1Context())
-            {
-                var lineRemove = db.Lines.SingleOrDefault(a => a.Id == id.Value);
-                db.Lines.Remove(lineRemove);
-                db.SaveChanges();
-            }
+            
         }
     }
 }

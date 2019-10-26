@@ -78,7 +78,9 @@
     <Compile Include="StationRepository.cs" />
     <Compile Include="StationRepositoryStub.cs" />
     <Compile Include="TicketRepository.cs" />
+    <Compile Include="TicketRepositoryStub.cs" />
     <Compile Include="TripRepository.cs" />
+    <Compile Include="TripRepositoryStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Oblig1Vy.Model\Oblig1Vy.Model.csproj">

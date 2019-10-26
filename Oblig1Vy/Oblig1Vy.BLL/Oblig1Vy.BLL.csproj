@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILineService.cs" />
     <Compile Include="IStationService.cs" />
+    <Compile Include="ITicketService.cs" />
+    <Compile Include="ITripService.cs" />
     <Compile Include="LineService.cs" />
     <Compile Include="OperationalIntervalService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
