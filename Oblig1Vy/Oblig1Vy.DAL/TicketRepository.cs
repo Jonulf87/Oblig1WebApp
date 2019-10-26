@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Oblig1Vy.DAL
 {
-    public class TicketRepository
+    public class TicketRepository : ITicketRepository
     {
         public int AddTicket(TicketVm ticket)
         {

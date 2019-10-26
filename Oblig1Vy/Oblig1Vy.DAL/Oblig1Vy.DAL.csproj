@@ -62,8 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILineRepository.cs" />
+    <Compile Include="IOperationalIntervalRepository.cs" />
     <Compile Include="IStationRepository.cs" />
+    <Compile Include="ITicketRepository.cs" />
+    <Compile Include="ITripRepository.cs" />
     <Compile Include="LineRepository.cs" />
+    <Compile Include="LineRepositoryStub.cs" />
     <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\OperationalInterval.cs" />
@@ -78,7 +83,9 @@
     <Compile Include="StationRepository.cs" />
     <Compile Include="StationRepositoryStub.cs" />
     <Compile Include="TicketRepository.cs" />
+    <Compile Include="TicketRepositoryStub.cs" />
     <Compile Include="TripRepository.cs" />
+    <Compile Include="TripRepositoryStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Oblig1Vy.Model\Oblig1Vy.Model.csproj">

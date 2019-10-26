@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace Oblig1Vy.DAL
 {
-    public class TripRepository
+    public class TripRepository : ITripRepository
     {
         public List<DepartureTimeVm> GetDepartureTimes(TravelSearchVm travelSearch)
         {
@@ -193,7 +193,7 @@ namespace Oblig1Vy.DAL
                         db.AuditLogs.Add(auditLog);
                     }
 
-                    db.SaveChanges(); 
+                    db.SaveChanges();
                 }
             }
         }
@@ -222,13 +222,13 @@ namespace Oblig1Vy.DAL
             using (Oblig1Context db = new Oblig1Context())
             {
                 var tripDelete = db.Trips.SingleOrDefault(a => a.Id == id);
-                
+
                 //Husk å legge if på flere singleordefault
-                
+
                 if (tripDelete != null)
                 {
                     db.Trips.Remove(tripDelete);
-                    db.SaveChanges(); 
+                    db.SaveChanges();
                 }
             }
         }

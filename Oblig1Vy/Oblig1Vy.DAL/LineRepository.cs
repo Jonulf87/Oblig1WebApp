@@ -8,7 +8,7 @@ using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.DAL
 {
-    public class LineRepository
+    public class LineRepository : ILineRepository
     {
         public LineVm GetLine(int id)
         {
@@ -23,7 +23,7 @@ namespace Oblig1Vy.DAL
                     DepartureStation = a.Departure.StationName,
                     ArrivalStation = a.Arrival.StationName
 
-                    
+
                 }).SingleOrDefault();
 
                 return line;
@@ -46,7 +46,7 @@ namespace Oblig1Vy.DAL
 
                 return linesList;
             }
-            
+
         }
 
         public void UpdateLine(LineVm lineEdit)

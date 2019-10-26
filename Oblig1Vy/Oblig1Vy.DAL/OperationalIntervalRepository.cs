@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Oblig1Vy.DAL
 {
-    public class OperationalIntervalRepository
+    public class OperationalIntervalRepository : IOperationalIntervalRepository
     {
         public OperationalIntervalVm GetOperationalInterval(int id)
         {
@@ -61,7 +61,7 @@ namespace Oblig1Vy.DAL
             using (Oblig1Context db = new Oblig1Context())
             {
                 var oisDb = db.OperationalIntervals.Where(a => a.Id == ois.Id).FirstOrDefault();
-                
+
                 oisDb.Name = ois.Name;
                 oisDb.StartDate = ois.StartDate;
                 oisDb.EndDate = ois.EndDate;
@@ -74,7 +74,7 @@ namespace Oblig1Vy.DAL
                 oisDb.Sunday = ois.Sunday;
 
                 db.SaveChanges();
-            }            
+            }
         }
 
         public int AddOis(OperationalIntervalVm oisVm)

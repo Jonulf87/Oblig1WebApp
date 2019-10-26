@@ -8,17 +8,29 @@ using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.BLL
 {
-    public class TicketService
+    public class TicketService : ITicketService
     {
+        private ITicketRepository _repository;
+
+        public TicketService()
+        {
+            _repository = new TicketRepository();
+        }
+
+        public TicketService(ITicketRepository stub)
+        {
+            _repository = stub;
+        }
+
         public int AddTicket(TicketVm ticket)
         {
-            var ticketRepository = new TicketRepository();
+            var ticketRepository = _repository;
             return ticketRepository.AddTicket(ticket);
         }
 
         public TicketSummaryVm GetTicketSummary(int id)
         {
-            var ticketRepository = new TicketRepository();
+            var ticketRepository = _repository;
             return ticketRepository.GetTicketSummary(id);
         }
     }
