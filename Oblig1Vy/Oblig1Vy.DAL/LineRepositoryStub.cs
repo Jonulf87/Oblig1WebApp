@@ -8,7 +8,7 @@ using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.DAL
 {
-    public class LineRepository : ILineRepository
+    public class LineRepositoryStub : ILineRepository
     {
         public LineVm GetLine(int id)
         {
