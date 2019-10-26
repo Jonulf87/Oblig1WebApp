@@ -55,11 +55,11 @@ namespace Oblig1Vy.DAL
             return station.Id;
         }
 
-        public void DeleteStation(int? id)
+        public void DeleteStation(int id)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
-                var stationRemove = db.Stations.FirstOrDefault(a => a.Id == id.Value);
+                var stationRemove = db.Stations.FirstOrDefault(a => a.Id == id);
                 db.Stations.Remove(stationRemove);
                 db.SaveChanges();
             }

@@ -53,10 +53,10 @@ namespace Oblig1Vy.BLL
             return stationId;
         }
 
-        public void DeleteStation(int? id)
+        public void DeleteStation(int id)
         {
             var stationRepo = _repository;
-            stationRepo.DeleteStation(id.Value);
+            stationRepo.DeleteStation(id);
         }
     }
 }
