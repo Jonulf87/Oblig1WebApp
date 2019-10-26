@@ -58,8 +58,18 @@ namespace Oblig1Vy.Controllers
             {
                 return RedirectToAction("Index");
             }
+
             var stationService = new StationService();
-            stationService.DeleteStation(id.Value);
+            var stationDelete = stationService.GetStation(id.Value);
+
+            return View(stationDelete);
+
+        }
+        [HttpPost]
+        public ActionResult DeleteStation(int id)
+        {
+            var stationService = new StationService();
+            stationService.DeleteStation(id);
 
             return RedirectToAction("Index");
         }

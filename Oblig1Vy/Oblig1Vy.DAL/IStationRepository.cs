@@ -6,7 +6,7 @@ namespace Oblig1Vy.DAL
     public interface IStationRepository
     {
         int AddStation(StationVm stationVm);
-        void DeleteStation(int? id);
+        void DeleteStation(int id);
         StationVm GetStation(int id);
         List<StationVm> GetStations();
         void UpdateStation(StationVm stationEdit);

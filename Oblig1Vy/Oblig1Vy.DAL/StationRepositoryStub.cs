@@ -49,7 +49,7 @@ namespace Oblig1Vy.DAL
             return station.Id;
         }
 
-        public void DeleteStation(int? id)
+        public void DeleteStation(int id)
         {
             
         }
