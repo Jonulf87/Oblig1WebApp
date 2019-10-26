@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStationService.cs" />
     <Compile Include="LineService.cs" />
     <Compile Include="OperationalIntervalService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

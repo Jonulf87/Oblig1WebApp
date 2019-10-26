@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oblig1Vy.BLL", "Oblig1Vy.BL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oblig1Vy.Model", "Oblig1Vy.Model\Oblig1Vy.Model.csproj", "{50C42705-B349-4B7C-9EC4-A17B5F74EFD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oblig1VyUnitTest", "Oblig1VyUnitTest\Oblig1VyUnitTest.csproj", "{A306A1A4-1B82-42BA-9F12-1A65059C4E02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{50C42705-B349-4B7C-9EC4-A17B5F74EFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C42705-B349-4B7C-9EC4-A17B5F74EFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50C42705-B349-4B7C-9EC4-A17B5F74EFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A306A1A4-1B82-42BA-9F12-1A65059C4E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A306A1A4-1B82-42BA-9F12-1A65059C4E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A306A1A4-1B82-42BA-9F12-1A65059C4E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A306A1A4-1B82-42BA-9F12-1A65059C4E02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

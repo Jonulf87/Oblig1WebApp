@@ -9,18 +9,30 @@ using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.BLL
 {
-    public class StationService
+    public class StationService : IStationService
     {
+        private IStationRepository _repository;
+        
+        public StationService()
+        {
+            _repository = new StationRepository();
+        }
+
+        public StationService(IStationRepository stub)
+        {
+            _repository = stub;
+        }
+
         public StationVm GetStation(int id)
         {
-            var stationRepo = new StationRepository();
+            var stationRepo = _repository;
             var station = stationRepo.GetStation(id);
 
             return station;
         }
         public List<StationVm> GetStations()
         {
-            var stationRepository = new StationRepository();
+            var stationRepository = _repository;
             var stations = stationRepository.GetStations();
 
             return stations;
@@ -29,13 +41,13 @@ namespace Oblig1Vy.BLL
 
         public void UpdateStation(StationVm station)
         {
-            var stationRepo = new StationRepository();
+            var stationRepo = _repository;
             stationRepo.UpdateStation(station);
         }
 
         public int AddStation(StationVm station)
         {
-            var stationRepo = new StationRepository();
+            var stationRepo = _repository;
             var stationId = stationRepo.AddStation(station);
 
             return stationId;
@@ -43,7 +55,7 @@ namespace Oblig1Vy.BLL
 
         public void DeleteStation(int? id)
         {
-            var stationRepo = new StationRepository();
+            var stationRepo = _repository;
             stationRepo.DeleteStation(id.Value);
         }
     }

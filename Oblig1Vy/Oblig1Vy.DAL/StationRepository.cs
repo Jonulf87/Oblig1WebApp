@@ -8,13 +8,13 @@ using Oblig1Vy.Model.ViewModels;
 
 namespace Oblig1Vy.DAL
 {
-    public class StationRepository
+    public class StationRepository : IStationRepository
     {
         public StationVm GetStation(int id)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
-                var station = db.Stations.Where(a => a.Id == id).Select( a => new StationVm { StationId = a.Id, StationName = a.StationName}).FirstOrDefault();
+                var station = db.Stations.Where(a => a.Id == id).Select(a => new StationVm { StationId = a.Id, StationName = a.StationName }).FirstOrDefault();
                 return station;
             }
         }
@@ -49,7 +49,7 @@ namespace Oblig1Vy.DAL
             using (Oblig1Context db = new Oblig1Context())
             {
                 db.Stations.Add(station);
-                db.SaveChanges();           
+                db.SaveChanges();
             }
 
             return station.Id;
