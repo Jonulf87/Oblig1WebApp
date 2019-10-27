@@ -11,6 +11,17 @@ namespace Oblig1Vy.Controllers
     [Authorize(Roles = "admins")]
     public class LineController : Controller
     {
+        private ILineService _LineBLL;
+
+        public LineController()
+        {
+            _LineBLL = new LineService();
+        }
+
+        public LineController(ILineService stub)
+        {
+            _LineBLL = stub;
+        }
 
         [HttpGet]
         public ActionResult Index()

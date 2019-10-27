@@ -55,7 +55,8 @@ namespace Oblig1Vy.DAL
             {
                 LineName = "Oslo - Bergen",
                 DepartureId = 9,
-                ArrivalId = 18
+                ArrivalId = 18,
+                Id = 20
             };
 
             return line.Id;

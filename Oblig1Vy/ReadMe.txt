@@ -1,0 +1,2 @@
+Brukernavn: admin
+Passord: hemmelig

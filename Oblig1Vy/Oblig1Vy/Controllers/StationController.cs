@@ -11,10 +11,22 @@ namespace Oblig1Vy.Controllers
     [Authorize(Roles = "admins")]
     public class StationController : Controller
     {
+        private IStationService _StationBLL;
+
+        public StationController()
+        {
+            _StationBLL = new StationService();
+        }
+
+        public StationController(IStationService stub)
+        {
+            _StationBLL = stub;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
-            var stationService = new StationService();
+            var stationService = _StationBLL;
             var stationsList = stationService.GetStations();
             return View(stationsList);
         }
@@ -28,7 +40,7 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddStation(StationVm station)
         {
-            var stationService = new StationService();
+            var stationService = _StationBLL;
             stationService.AddStation(station);
 
             return RedirectToAction("Index");
@@ -41,7 +53,7 @@ namespace Oblig1Vy.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var stationService = new StationService();
+            var stationService = _StationBLL;
             var station = stationService.GetStation(id.Value);
 
             return View(station);
@@ -51,7 +63,7 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateStation(StationVm station)
         {
-            var stationSer = new StationService();
+            var stationSer = _StationBLL;
             stationSer.UpdateStation(station);
 
             return RedirectToAction("Index");
@@ -66,7 +78,7 @@ namespace Oblig1Vy.Controllers
                 return RedirectToAction("Index");
             }
 
-            var stationService = new StationService();
+            var stationService = _StationBLL;
             var stationDelete = stationService.GetStation(id.Value);
 
             return View(stationDelete);
@@ -76,7 +88,7 @@ namespace Oblig1Vy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteStation(int id)
         {
-            var stationService = new StationService();
+            var stationService = _StationBLL;
             stationService.DeleteStation(id);
 
             return RedirectToAction("Index");
