@@ -17,7 +17,9 @@ namespace Oblig1Vy.DAL
                 ArrivalStationId = ticket.ArrivalStationId,
                 DepartureStationId = ticket.DepartureStationId,
                 TripId = ticket.TripId,
-                JourneyDate = ticket.Date
+                JourneyDate = ticket.Date,
+                Price = ticket.Price
+                
             };
 
             using (Oblig1Context db = new Oblig1Context())

@@ -20,35 +20,35 @@ namespace Oblig1Vy.MVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_Error(object sender, EventArgs e)
-        {
-            var exception = Server.GetLastError();
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    var exception = Server.GetLastError();
             
-            if (exception != null)
-            {
-                try
-                {
-                    var logFile = Server.MapPath("~/App_Data/error.log");
-                    var sb = new StringBuilder();
+        //    if (exception != null)
+        //    {
+        //        try
+        //        {
+        //            var logFile = Server.MapPath("~/App_Data/error.log");
+        //            var sb = new StringBuilder();
 
-                    sb.AppendLine($"Timestamp: {DateTime.Now.ToString("yyyy-MM-dd HH:mm")}");
-                    sb.AppendLine($"Error message: {exception.Message}");
-                    sb.AppendLine("Stack trace:");
-                    sb.AppendLine(exception.StackTrace);
-                    sb.AppendLine("--------------------------------------------------------------------------------------------------------------------------");
-                    sb.AppendLine();
+        //            sb.AppendLine($"Timestamp: {DateTime.Now.ToString("yyyy-MM-dd HH:mm")}");
+        //            sb.AppendLine($"Error message: {exception.Message}");
+        //            sb.AppendLine("Stack trace:");
+        //            sb.AppendLine(exception.StackTrace);
+        //            sb.AppendLine("--------------------------------------------------------------------------------------------------------------------------");
+        //            sb.AppendLine();
 
-                    File.AppendAllText(logFile, sb.ToString());
-                }
-                catch (Exception)
-                {
+        //            File.AppendAllText(logFile, sb.ToString());
+        //        }
+        //        catch (Exception)
+        //        {
 
-                }
-            }
+        //        }
+        //    }
 
-            Server.ClearError();
+        //    Server.ClearError();
 
-            HttpContext.Current.Response.RedirectToRoute("Default", new { Controller = "Home", Action = "Error" });
-        }
+        //    HttpContext.Current.Response.RedirectToRoute("Default", new { Controller = "Home", Action = "Error" });
+        //}
     }
 }

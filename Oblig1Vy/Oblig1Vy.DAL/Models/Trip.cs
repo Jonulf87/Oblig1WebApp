@@ -16,5 +16,7 @@ namespace Oblig1Vy.DAL.Models
         public virtual List<Schedule> Schedules { get; set; }
         public TimeSpan DepartureTime { get; set; }
         public TimeSpan ArrivalTime { get; set; }
+        public decimal BasePrice { get; set; }
+        public decimal StopsPrice { get; set; }
     }
 }

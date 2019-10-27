@@ -97,6 +97,23 @@ namespace Oblig1Vy.DAL
             }
         }
 
+        public PriceVm GetPrices(int id)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var price = db.Trips.Where(a => a.Id == id).Select(b => new PriceVm
+                {
+                    BasePrice = b.BasePrice,
+                    StopsPrice = b.StopsPrice
+                }).SingleOrDefault();
+
+                return price;
+            }
+
+            
+
+        }
+
         public TripVm GetTrip(int id)
         {
             using (Oblig1Context db = new Oblig1Context())

@@ -12,5 +12,6 @@ namespace Oblig1Vy.DAL
         TripVm GetTrip(int id);
         List<TripVm> GetTrips();
         void UpdateTrip(TripVm tripVm, string userName);
+        PriceVm GetPrices(int id);
     }
 }

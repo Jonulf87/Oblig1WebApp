@@ -28,11 +28,16 @@ namespace Oblig1Vy.BLL
 
             var departureTimes = tripRepository.GetDepartureTimes(travelSearch);
 
-            //foreach (var departureTime in departureTimes)
-            //{
-            //    var price = 50 + (departureTime.Stops.Count * 15);
-            //    //calculate price based on departureTime.Stops
-            //}
+            foreach (var departureTime in departureTimes)
+            {
+                var price = tripRepository.GetPrices(departureTime.TripId);
+
+                var numberOfStops = departureTime.Stops.Count - 1;
+
+                var totalPrice = price.BasePrice + numberOfStops * price.StopsPrice;
+
+                departureTime.Price = totalPrice;
+            }
 
             return departureTimes;
         }

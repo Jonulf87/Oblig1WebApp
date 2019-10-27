@@ -10,7 +10,7 @@ namespace Oblig1Vy.DAL.Models
     {
         public int Id { get; set; }
         public DateTime JourneyDate { get; set; }
-        //public decimal Price { get; set; }
+        public decimal Price { get; set; }
         public int TripId { get; set; }
         public virtual Trip Trip { get; set; }
         public int ArrivalStationId { get; set; }

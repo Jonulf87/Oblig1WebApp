@@ -13,7 +13,7 @@
     {
         <div class="row departure" style="border-bottom: 1px solid #666">
             <div class="departureInfo">
-                <div class="col-sm-2 col-xs-4">
+                <div class="col-sm-2 col-xs-3">
                     <span>
                         @Html.DisplayFor(modelItem => item.DepartureStation)<br />
                         @item.DepartureStationTime.ToString("hh\\:mm")
@@ -21,18 +21,24 @@
                 </div>
 
 
-                <div class="col-sm-2 col-xs-4">
+                <div class="col-sm-2 col-xs-3">
                     <span>
                         @Html.DisplayFor(modelItem => item.ArrivalStation)<br />
                         @item.ArrivalStationTime.ToString("hh\\:mm")
                     </span>
                 </div>
-
-                <div class="col-sm-8 col-xs-4 text-right">
+                <div class="col-sm-6 col-xs-3 text-right">
+                    <span>
+                        Pris<br />
+                        @item.Price
+                    </span>
+                </div>
+                <div class="col-sm-2 col-xs-3 text-right">
                     <input type="hidden" name="tripId" value="@item.TripId" />
                     <input type="hidden" name="date" value="@ViewBag.TicketDate.ToString("yyyy-MM-dd HH:mm:ss")" />
                     <input type="hidden" name="departureStationId" value="@item.DepartureStationId" />
                     <input type="hidden" name="arrivalStationId" value="@item.ArrivalStationId" />
+                    
                     <input type="submit" class="btn btn-sm chooseButton" value="Velg reise" />
                 </div>
                 <div class="clearfix"></div>

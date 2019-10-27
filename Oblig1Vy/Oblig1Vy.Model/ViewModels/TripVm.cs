@@ -30,5 +30,11 @@ namespace Oblig1Vy.Model.ViewModels
         public string ArrivalTime { get; set; }
 
         public List<ScheduleVm> Schedules { get; set; }
+
+        [Display(Name = "Grunnpris")]
+        public decimal BasePrice { get; set; }
+
+        [Display(Name = "Pris per stopp")]
+        public decimal StopsPrice { get; set; }
     }
 }

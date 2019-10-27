@@ -11,5 +11,6 @@ namespace Oblig1Vy.Model.ViewModels
         public DateTime Date { get; set; }
         public int DepartureStationId { get; set; }
         public int ArrivalStationId { get; set; }
+        public decimal Price { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace Oblig1Vy.BLL
         TripVm GetTrip(int id);
         List<TripVm> GetTrips();
         void UpdateTrip(TripVm trip, string userName);
+        //PriceVm GetPrices(int id);
     }
 }

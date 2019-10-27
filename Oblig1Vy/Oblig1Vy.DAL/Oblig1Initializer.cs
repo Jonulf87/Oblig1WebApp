@@ -129,14 +129,18 @@ namespace Oblig1Vy.DAL
                     Line = lines[0],
                     DepartureTime = new TimeSpan(8, 47, 0),
                     ArrivalTime = new TimeSpan(16, 25, 0),
-                    OperationalInterval = operations[0]
+                    OperationalInterval = operations[0],
+                    BasePrice = 50,
+                    StopsPrice = 15
                 },
                 new Trip()
                 {
                     Line = lines[1],
                     DepartureTime = new TimeSpan(7, 25, 0),
                     ArrivalTime = new TimeSpan(15, 05, 0),
-                    OperationalInterval = operations[0]
+                    OperationalInterval = operations[0],
+                    BasePrice = 50,
+                    StopsPrice = 15
 
                 },
                 new Trip()
@@ -144,7 +148,9 @@ namespace Oblig1Vy.DAL
                     Line = lines[2],
                     DepartureTime = new TimeSpan(8, 18, 0),
                     ArrivalTime = new TimeSpan(15, 3, 0),
-                    OperationalInterval = operations[0]
+                    OperationalInterval = operations[0],
+                    BasePrice = 30,
+                    StopsPrice = 25
 
                 },
                 new Trip()
@@ -152,7 +158,9 @@ namespace Oblig1Vy.DAL
                     Line = lines[3],
                     DepartureTime = new TimeSpan(8, 2, 0),
                     ArrivalTime = new TimeSpan(14, 31, 0),
-                    OperationalInterval = operations[0]
+                    OperationalInterval = operations[0],
+                    BasePrice = 30,
+                    StopsPrice = 25
 
                 }
             };

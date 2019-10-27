@@ -11,7 +11,7 @@ namespace Oblig1Vy.MVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            throw new Exception("Test");
+            //throw new Exception("Test");
 
             return View();
         }
@@ -47,11 +47,23 @@ namespace Oblig1Vy.MVC.Controllers
             return RedirectToAction("TicketSummary", new { id = ticketId });
         }
 
-        [HttpGet]
-        public ActionResult TicketSummary(int id)
+
+        public ActionResult TicketOrder()
         {
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public ActionResult TicketSummary(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
             var ticketService = new TicketService();
-            var ticketSummary = ticketService.GetTicketSummary(id);
+            var ticketSummary = ticketService.GetTicketSummary(id.Value);
 
             return View(ticketSummary);
         }

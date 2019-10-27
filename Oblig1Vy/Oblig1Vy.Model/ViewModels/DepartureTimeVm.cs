@@ -17,6 +17,7 @@ namespace Oblig1Vy.Model.ViewModels
         public int ArrivalStationId { get; set; }
         public TimeSpan ArrivalStationTime { get; set; }
         public List<DepartureTimeStop> Stops { get; set; }
+        public decimal Price { get; set; }
 
     }
 

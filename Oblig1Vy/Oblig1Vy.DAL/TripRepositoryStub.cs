@@ -121,5 +121,16 @@ namespace Oblig1Vy.DAL
         {
             
         }
+
+        public PriceVm GetPrices(int id)
+        {
+            var price = new PriceVm
+            {
+                BasePrice = 50,
+                StopsPrice = 15
+            };
+
+            return price;
+        }
     }
 }
