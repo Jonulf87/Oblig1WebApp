@@ -42,8 +42,9 @@
             @Html.DisplayFor(modelItem => item.ArrivalTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Detaljer", "DetailsTrip", "Trip", new { id = item.Id }, null) |
+            @Html.ActionLink("Endre", "UpdateTrip", "Trip", new { id = item.Id }, null) |
+            @Html.ActionLink("Slett", "DeleteTrip", "Trip", new { id = item.Id }, null)
         </td>
     </tr>
 }

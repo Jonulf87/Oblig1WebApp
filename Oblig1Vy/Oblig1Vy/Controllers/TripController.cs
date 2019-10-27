@@ -24,6 +24,8 @@ namespace Oblig1Vy.Controllers
         [HttpGet]
         public ActionResult AddTrip()
         {
+            SetDropdownsInViewBags();
+
             return View();
         }
 
@@ -83,6 +85,48 @@ namespace Oblig1Vy.Controllers
             tripService.DeleteTrip(id, User.Identity.Name);
 
             return RedirectToAction("Index");
+        }
+
+        private void SetDropdownsInViewBags()
+        {
+            var operationalIntervalService = new OperationalIntervalService();
+            var stationService = new StationService();
+            var lineService = new LineService();
+
+            ViewBag.Stations = stationService.GetStations()
+                .OrderBy(a => a.StationName)
+                .ToList();
+
+            ViewBag.Ois = operationalIntervalService.GetOperationalIntervals()
+                .OrderBy(a => a.Name)
+                .Select(a => new SelectListItem
+                {
+                    Text = a.Name,
+                    Value = a.Id.ToString()
+                })
+                .ToList();
+
+            ViewBag.Lines = lineService.getLines()
+                .OrderBy(a => a.LineName)
+                .Select(a => new SelectListItem
+                {
+                    Text = a.LineName,
+                    Value = a.Id.ToString()
+                })
+                .ToList();
+        }
+
+        public ActionResult DetailsTrip(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var tripService = new TripService();
+            var trip = tripService.GetTrip(id.Value);
+
+            return View(trip);
         }
     }
 }

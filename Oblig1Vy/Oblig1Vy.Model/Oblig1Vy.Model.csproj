@@ -53,6 +53,7 @@
     <Compile Include="ViewModels\LineVm.cs" />
     <Compile Include="ViewModels\LoginVm.cs" />
     <Compile Include="ViewModels\OperationalIntervalVm.cs" />
+    <Compile Include="ViewModels\ScheduleVm.cs" />
     <Compile Include="ViewModels\StationVm.cs" />
     <Compile Include="ViewModels\DepartureTimeVm.cs" />
     <Compile Include="ViewModels\TicketSummaryVm.cs" />

@@ -109,7 +109,15 @@ namespace Oblig1Vy.DAL
                     LineId = a.LineId,
                     LineName = a.Line.LineName,
                     DepartureTime = a.DepartureTime.ToString(@"hh\:mm"),
-                    ArrivalTime = a.ArrivalTime.ToString(@"hh\:mm")
+                    ArrivalTime = a.ArrivalTime.ToString(@"hh\:mm"),
+                    Schedules = a.Schedules.Select(b => new ScheduleVm
+                    {
+                        ArrivalTime = b.ArrivalTime,
+                        DepartureTime = b.DepartureTime,
+                        Id = b.Id,
+                        StationId = b.StationId,
+                        StationName = b.Station.StationName
+                    }).ToList()
                 }).SingleOrDefault();
 
                 return trip;
@@ -120,16 +128,29 @@ namespace Oblig1Vy.DAL
         {
             using (Oblig1Context db = new Oblig1Context())
             {
-                var tripList = db.Trips.Include(a => a.Line).Include(a => a.OperationalInterval).ToList().Select(a => new TripVm
-                {
-                    Id = a.Id,
-                    OperationalIntervalId = a.OperationalIntervalId,
-                    OperationalIntervalName = a.OperationalInterval.Name,
-                    LineId = a.LineId,
-                    LineName = a.Line.LineName,
-                    ArrivalTime = a.ArrivalTime.ToString(@"hh\:mm"),
-                    DepartureTime = a.DepartureTime.ToString(@"hh\:mm")
-                }).ToList();
+                var tripList = db.Trips
+                    .Include(a => a.Line)
+                    .Include(a => a.OperationalInterval)
+                    .Include(a => a.Schedules)
+                    .ToList()
+                    .Select(a => new TripVm
+                    {
+                        Id = a.Id,
+                        OperationalIntervalId = a.OperationalIntervalId,
+                        OperationalIntervalName = a.OperationalInterval.Name,
+                        LineId = a.LineId,
+                        LineName = a.Line.LineName,
+                        ArrivalTime = a.ArrivalTime.ToString(@"hh\:mm"),
+                        DepartureTime = a.DepartureTime.ToString(@"hh\:mm"),
+                        Schedules = a.Schedules.Select(b => new ScheduleVm
+                        {
+                            ArrivalTime = b.ArrivalTime,
+                            DepartureTime = b.DepartureTime,
+                            Id = b.Id,
+                            StationId = b.StationId,
+                            StationName = b.Station.StationName
+                        }).ToList()
+                    }).ToList();
 
                 return tripList;
             }
@@ -208,6 +229,16 @@ namespace Oblig1Vy.DAL
                 DepartureTime = TimeSpan.Parse(tripVm.DepartureTime)
             };
 
+            if (tripVm.Schedules != null)
+            {
+                trip.Schedules = tripVm.Schedules.Select(a => new Schedule
+                {
+                    ArrivalTime = a.ArrivalTime,
+                    DepartureTime = a.DepartureTime,
+                    StationId = a.StationId
+                }).ToList();
+            }
+
             using (Oblig1Context db = new Oblig1Context())
             {
                 db.Trips.Add(trip);
@@ -227,6 +258,11 @@ namespace Oblig1Vy.DAL
 
                 if (tripDelete != null)
                 {
+                    foreach (var schedule in tripDelete.Schedules.ToList())
+                    {
+                        db.Schedules.Remove(schedule);
+                    }
+
                     db.Trips.Remove(tripDelete);
                     db.SaveChanges();
                 }

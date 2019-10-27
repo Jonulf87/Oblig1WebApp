@@ -8,6 +8,7 @@
 <br />
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     foreach (var item in Model)
     {
         <div class="row departure" style="border-bottom: 1px solid #666">

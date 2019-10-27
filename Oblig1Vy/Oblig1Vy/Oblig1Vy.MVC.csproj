@@ -325,6 +325,7 @@
     <Content Include="Views\Line\UpdateLine.cshtml" />
     <Content Include="Views\Line\DeleteLine.cshtml" />
     <Content Include="Views\OperationalInterval\DeleteOis.cshtml" />
+    <Content Include="Views\Trip\DetailsTrip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

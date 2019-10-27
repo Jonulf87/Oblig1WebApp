@@ -1,5 +1,6 @@
 ﻿using Oblig1Vy.BLL;
 using Oblig1Vy.Model.ViewModels;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,6 +11,8 @@ namespace Oblig1Vy.MVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            throw new Exception("Test");
+
             return View();
         }
 
@@ -27,7 +30,6 @@ namespace Oblig1Vy.MVC.Controllers
             {
                 ViewBag.TicketDate = travelSearch.Date;
             }
-            
 
             var tripService = new TripService();
             var departureTimeList = tripService.GetDepartureTimes(travelSearch);
@@ -63,7 +65,10 @@ namespace Oblig1Vy.MVC.Controllers
             return Json(stations, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
-
- 
 }

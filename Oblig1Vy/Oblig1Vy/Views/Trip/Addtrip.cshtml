@@ -4,45 +4,31 @@
     ViewBag.Title = "Addtrip";
 }
 
-<h2>Addtrip</h2>
+<h2>Opprett ny tur</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TripVm</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.OperationalIntervalId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OperationalIntervalId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.OperationalIntervalId, (List<SelectListItem>)ViewBag.Ois, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OperationalIntervalId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OperationalIntervalName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OperationalIntervalName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OperationalIntervalName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.LineId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LineId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.LineId, (List<SelectListItem>)ViewBag.Lines, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LineId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LineName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LineName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LineName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -63,13 +49,93 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div>
+                <h3>Stoppesteder</h3>
+                <p>
+                    <span class="btn btn-default schedule-add">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Legg til stoppested</span>
+                    </span>
+                </p>
+                <div>
+                    <table class="table table-bordered" id="schedules">
+                        <thead>
+                            <tr>
+                                <td>Ankomsttid</td>
+                                <td>Avgangstid</td>
+                                <td>Stasjon</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Tilbake", "Index")
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        function newSchedule(i) {
+            var scheduleTemplate = "<tr>";
+            scheduleTemplate += "<td>";
+            scheduleTemplate += '<input type="hidden" name=Schedules[' + i + '].Id value="0">';
+            scheduleTemplate += '<input type="time" name=Schedules[' + i + '].ArrivalTime>';
+            scheduleTemplate += '</td><td>';
+            scheduleTemplate += '<input type="time" name=Schedules[' + i + '].DepartureTime>';
+            scheduleTemplate += '</td><td>';
+            scheduleTemplate += '<select name=Schedules[' + i + '].StationId>';
+            @foreach (var station in ViewBag.Stations)
+            {
+                @:scheduleTemplate += '<option value="@station.StationId">@station.StationName</option>';
+            }
+            scheduleTemplate += '</select>';
+            scheduleTemplate += '</td>';
+            scheduleTemplate += '<td>';
+            scheduleTemplate += '<a class="schedule-delete" href="#">Fjern</a>';
+            scheduleTemplate += '</td>';
+            scheduleTemplate += '</td></tr>';
+
+            return scheduleTemplate;
+        }
+
+        $("body").on("click", ".schedule-add", function () {
+            var lastIndex = -1;
+
+            if ($("#schedules input").length > 0) {
+                lastIndex = parseInt($("#schedules input").last().attr('name').split('[')[1].split(']')[0]);
+            }
+
+            $("#schedules tbody").append($(newSchedule(lastIndex + 1)));
+
+            return false;
+        });
+
+        $("body").on("click", ".schedule-delete", function () {
+            $(this).parents("tr").remove();
+
+            $("#schedules tbody tr").each(function (i, el) {
+                $(el).find("input, select").each(function (i2, el2) {
+                    var inputEl = $(el2);
+                    var oldName = inputEl.attr("name");
+                    var newName = oldName.split('[')[0] + '[' + i + ']' + oldName.split(']')[1];
+                    inputEl.attr("name", newName);
+                });
+            });
+
+            return false;
+        });
+    </script>
+}

@@ -1,0 +1,69 @@
+﻿@model Oblig1Vy.Model.ViewModels.TripVm
+
+@{
+    ViewBag.Title = "DetailsTrip";
+}
+
+<h2>Detaljer</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OperationalIntervalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperationalIntervalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArrivalTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArrivalTime)
+        </dd>
+
+    </dl>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Ankomsttid</td>
+                <td>Avgangstid</td>
+                <td>Stasjon</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Schedules)
+            {
+            <tr>
+                <td>@(item.ArrivalTime?.ToString("hh\\:mm"))</td>
+                <td>@(item.DepartureTime?.ToString("hh\\:mm"))</td>
+                <td>@item.StationName</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Endre", "UpdateTrip", "Trip", new { id = Model.Id }, null) |
+    @Html.ActionLink("Tilbake", "Index")
+</p>
