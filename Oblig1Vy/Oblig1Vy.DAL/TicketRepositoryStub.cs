@@ -35,5 +35,17 @@ namespace Oblig1Vy.DAL
                     TicketDateAndTime = DateTime.Parse("2020-05-01")
                 };
         }
+
+        public TicketVm GetTicket(int id)
+        {
+            return new TicketVm
+            {
+                TripId = 1,
+                Date = DateTime.Now,
+                DepartureStationId = 1,
+                ArrivalStationId = 2,
+                Price = 300
+            };
+        }
     }
 }

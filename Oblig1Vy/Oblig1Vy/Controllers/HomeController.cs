@@ -44,13 +44,21 @@ namespace Oblig1Vy.MVC.Controllers
             var ticketService = new TicketService();
             var ticketId = ticketService.AddTicket(ticket);
 
-            return RedirectToAction("TicketSummary", new { id = ticketId });
+            return RedirectToAction("TicketOrder", new { id = ticketId});
         }
 
 
-        public ActionResult TicketOrder()
+        public ActionResult TicketOrder(int? ticketId)
         {
-            return View();
+            if (ticketId == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var ticketService = new TicketService();
+            var ticket = ticketService.GetTicket(ticketId.Value);
+
+            return View(ticket);
         }
 
 

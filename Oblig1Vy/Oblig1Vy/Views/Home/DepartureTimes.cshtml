@@ -6,10 +6,8 @@
 
 <h2>Velg avgang</h2>
 <br />
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    foreach (var item in Model)
+
+    @foreach (var item in Model)
     {
         <div class="row departure" style="border-bottom: 1px solid #666">
             <div class="departureInfo">
@@ -34,31 +32,32 @@
                     </span>
                 </div>
                 <div class="col-sm-2 col-xs-3 text-right">
-                    <input type="hidden" name="tripId" value="@item.TripId" />
-                    <input type="hidden" name="date" value="@ViewBag.TicketDate.ToString("yyyy-MM-dd HH:mm:ss")" />
-                    <input type="hidden" name="departureStationId" value="@item.DepartureStationId" />
-                    <input type="hidden" name="arrivalStationId" value="@item.ArrivalStationId" />
-                    
-                    <input type="submit" class="btn btn-sm chooseButton" value="Velg reise" />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="tripId" value="@item.TripId" />
+                        <input type="hidden" name="date" value="@ViewBag.TicketDate.ToString("yyyy-MM-dd HH:mm:ss")" />
+                        <input type="hidden" name="departureStationId" value="@item.DepartureStationId" />
+                        <input type="hidden" name="arrivalStationId" value="@item.ArrivalStationId" />
+                        <input type="hidden" name="price" value="@item.Price"/>
+
+                        <input type="submit" class="btn btn-sm chooseButton" value="Velg reise" />
+
+                    }
                 </div>
                 <div class="clearfix"></div>
             </div>
 
             <div class="stopsDisplay" style="display:none">
-                @foreach (var station in Model)
+
+                @foreach (var stop in item.Stops)
                 {
-                    foreach (var stop in station.Stops)
-                    {
-                        @Html.DisplayFor(modelItem => stop.Name)<br />
-                        <p>@stop.DepartureTime.ToString("hh\\:mm")</p>
-                    }
+                    @Html.DisplayFor(modelItem => stop.Name)<br />
+                    <p>@stop.DepartureTime.ToString("hh\\:mm")</p>
                 }
             </div>
         </div>
-        
-
-    }
-}
+     }
 
     @section scripts
 {

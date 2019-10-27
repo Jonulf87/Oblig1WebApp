@@ -6,5 +6,6 @@ namespace Oblig1Vy.DAL
     {
         int AddTicket(TicketVm ticket);
         TicketSummaryVm GetTicketSummary(int id);
+        TicketVm GetTicket(int id);
     }
 }

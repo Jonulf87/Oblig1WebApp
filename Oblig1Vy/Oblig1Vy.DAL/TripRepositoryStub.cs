@@ -122,7 +122,7 @@ namespace Oblig1Vy.DAL
             
         }
 
-        public PriceVm GetPrices(int id)
+        public PriceVm GetPrice(int id)
         {
             var price = new PriceVm
             {
@@ -131,6 +131,11 @@ namespace Oblig1Vy.DAL
             };
 
             return price;
+        }
+
+        public int GetNumberOfStops(int tripId, int departureStationId, int arrivalStationId)
+        {
+            return 5;
         }
     }
 }

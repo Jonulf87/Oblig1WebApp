@@ -18,8 +18,8 @@ namespace Oblig1Vy.DAL
                 DepartureStationId = ticket.DepartureStationId,
                 TripId = ticket.TripId,
                 JourneyDate = ticket.Date,
-                Price = ticket.Price
-                
+                Price = ticket.Price,
+                State = TicketState.Pending
             };
 
             using (Oblig1Context db = new Oblig1Context())
@@ -29,6 +29,23 @@ namespace Oblig1Vy.DAL
             }
 
             return travelTicket.Id;
+        }
+
+        public TicketVm GetTicket(int id)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var ticket = db.Tickets.Where(a => a.Id == id).SingleOrDefault();
+
+                return new TicketVm
+                {
+                    TripId = ticket.TripId,
+                    Date = ticket.JourneyDate,
+                    DepartureStationId = ticket.DepartureStationId,
+                    ArrivalStationId = ticket.ArrivalStationId,
+                    Price = ticket.Price
+                };
+            }
         }
 
         public TicketSummaryVm GetTicketSummary(int id)

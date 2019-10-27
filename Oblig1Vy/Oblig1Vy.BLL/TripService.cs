@@ -30,11 +30,11 @@ namespace Oblig1Vy.BLL
 
             foreach (var departureTime in departureTimes)
             {
-                var price = tripRepository.GetPrices(departureTime.TripId);
+                var price = tripRepository.GetPrice(departureTime.TripId);
 
-                var numberOfStops = departureTime.Stops.Count - 1;
+                var numberOfStops = departureTime.Stops.Count;
 
-                var totalPrice = price.BasePrice + numberOfStops * price.StopsPrice;
+                var totalPrice = CalculatePrice(price.BasePrice, price.StopsPrice, numberOfStops);
 
                 departureTime.Price = totalPrice;
             }
@@ -87,5 +87,9 @@ namespace Oblig1Vy.BLL
             tripRepo.DeleteTrip(id, userName);
         }
 
+        public static decimal CalculatePrice(decimal basePrice, decimal stopsPrice, int numberOfStops)
+        {
+            return basePrice + (numberOfStops * stopsPrice);
+        }
     }
 }

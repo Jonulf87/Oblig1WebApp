@@ -17,7 +17,15 @@ namespace Oblig1Vy.DAL.Models
         public virtual Station  ArrivalStation { get; set; }
         public int DepartureStationId { get; set; }
         public virtual Station DepartureStation { get; set; }
+        public string Email { get; set; }
+        public string CardNumber { get; set; }
+        public TicketState State { get; set; }
 
+    }
 
+    public enum TicketState
+    {
+        Pending = 0,
+        Complete = 1
     }
 }

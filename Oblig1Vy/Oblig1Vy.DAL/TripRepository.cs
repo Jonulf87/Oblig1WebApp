@@ -97,7 +97,7 @@ namespace Oblig1Vy.DAL
             }
         }
 
-        public PriceVm GetPrices(int id)
+        public PriceVm GetPrice(int id)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
@@ -283,6 +283,21 @@ namespace Oblig1Vy.DAL
                     db.Trips.Remove(tripDelete);
                     db.SaveChanges();
                 }
+            }
+        }
+
+        public int GetNumberOfStops(int tripId, int departureStation, int arrivalStation)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var trip = db.Trips.SingleOrDefault(a => a.Id == tripId);
+
+                var arrivalSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == arrivalStation);
+                var departureSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == departureStation);
+
+                return trip.Schedules
+                    .Where(a => a.DepartureTime > departureSchedule.DepartureTime && a.ArrivalTime < arrivalSchedule.ArrivalTime)
+                    .Count();
             }
         }
     }
