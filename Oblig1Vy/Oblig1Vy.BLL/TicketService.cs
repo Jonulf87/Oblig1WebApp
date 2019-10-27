@@ -28,7 +28,7 @@ namespace Oblig1Vy.BLL
         public int AddTicket(TicketVm ticket)
         {
             var basePrice = _tripRepository.GetPrice(ticket.TripId);
-            var getNumberOfStops = _tripRepository.GetNumberOfStops(ticket.TripId, ticket.ArrivalStationId, ticket.DepartureStationId);
+            var getNumberOfStops = _tripRepository.GetNumberOfStops(ticket.TripId, ticket.DepartureStationId, ticket.ArrivalStationId);
             var price = TripService.CalculatePrice(basePrice.BasePrice, basePrice.StopsPrice, getNumberOfStops);
 
             ticket.Price = price;
@@ -44,6 +44,13 @@ namespace Oblig1Vy.BLL
         public TicketVm GetTicket(int id)
         {
             return _ticketRepository.GetTicket(id);
+        }
+
+        public void FinalizeTicket(FinalizeTicketVm finalizeTicket)
+        {
+            _ticketRepository.FinalizeTicket(finalizeTicket);
+
+            // SEND MAIL?
         }
     }
 }

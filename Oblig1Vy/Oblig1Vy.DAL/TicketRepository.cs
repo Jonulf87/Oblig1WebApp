@@ -31,6 +31,20 @@ namespace Oblig1Vy.DAL
             return travelTicket.Id;
         }
 
+        public void FinalizeTicket(FinalizeTicketVm finalizeTicket)
+        {
+            using (Oblig1Context db = new Oblig1Context())
+            {
+                var ticketToFinalize = db.Tickets.Single(a => a.Id == finalizeTicket.TicketId);
+
+                ticketToFinalize.Email = finalizeTicket.Email;
+                ticketToFinalize.CardNumber = finalizeTicket.CardNumber;
+                ticketToFinalize.State = TicketState.Complete;
+
+                db.SaveChanges();
+            }
+        }
+
         public TicketVm GetTicket(int id)
         {
             using (Oblig1Context db = new Oblig1Context())
@@ -39,6 +53,7 @@ namespace Oblig1Vy.DAL
 
                 return new TicketVm
                 {
+                    Id = ticket.Id,
                     TripId = ticket.TripId,
                     Date = ticket.JourneyDate,
                     DepartureStationId = ticket.DepartureStationId,

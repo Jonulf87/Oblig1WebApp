@@ -226,6 +226,42 @@ namespace Oblig1Vy.DAL
                     tripDb.ArrivalTime = arrivalTime;
                     tripDb.DepartureTime = departureTime;
 
+                    if (tripVm.Schedules == null || tripVm.Schedules.Count == 0)
+                    {
+                        db.Schedules.RemoveRange(tripDb.Schedules);
+                    }
+                    else
+                    {
+                        var scheduleIds = tripVm.Schedules.Select(a => a.Id).ToList();
+                        var schedulesToRemove = tripDb.Schedules.Where(a => !scheduleIds.Contains(a.Id));
+                        var schedulesToUpdate = tripDb.Schedules.Where(a => scheduleIds.Contains(a.Id));
+                        var schedulesToAdd = tripVm.Schedules.Where(a => a.Id == 0);
+
+                        if (schedulesToRemove.Any())
+                        {
+                            db.Schedules.RemoveRange(schedulesToRemove);
+                        }
+
+                        foreach (var schedule in schedulesToUpdate)
+                        {
+                            var scheduleVm = tripVm.Schedules.Single(a => a.Id == schedule.Id);
+
+                            schedule.StationId = scheduleVm.StationId;
+                            schedule.ArrivalTime = scheduleVm.ArrivalTime;
+                            schedule.DepartureTime = scheduleVm.DepartureTime;
+                        }
+
+                        foreach (var schedule in schedulesToAdd)
+                        {
+                            tripDb.Schedules.Add(new Schedule
+                            {
+                                StationId = schedule.StationId,
+                                ArrivalTime = schedule.ArrivalTime,
+                                DepartureTime = schedule.DepartureTime
+                            });
+                        }
+                    }
+
                     if (!string.IsNullOrEmpty(auditLog.Log))
                     {
                         db.AuditLogs.Add(auditLog);
@@ -286,14 +322,14 @@ namespace Oblig1Vy.DAL
             }
         }
 
-        public int GetNumberOfStops(int tripId, int departureStation, int arrivalStation)
+        public int GetNumberOfStops(int tripId, int departureStationId, int arrivalStationId)
         {
             using (Oblig1Context db = new Oblig1Context())
             {
                 var trip = db.Trips.SingleOrDefault(a => a.Id == tripId);
 
-                var arrivalSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == arrivalStation);
-                var departureSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == departureStation);
+                var arrivalSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == arrivalStationId);
+                var departureSchedule = trip.Schedules.SingleOrDefault(a => a.StationId == departureStationId);
 
                 return trip.Schedules
                     .Where(a => a.DepartureTime > departureSchedule.DepartureTime && a.ArrivalTime < arrivalSchedule.ArrivalTime)

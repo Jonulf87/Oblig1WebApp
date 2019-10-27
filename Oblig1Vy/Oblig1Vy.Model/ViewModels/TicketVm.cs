@@ -8,6 +8,7 @@ namespace Oblig1Vy.Model.ViewModels
 {
     public class TicketVm
     {
+        public int Id { get; set; }
         public int TripId { get; set; }
         public DateTime Date { get; set; }
         public int DepartureStationId { get; set; }

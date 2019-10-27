@@ -47,21 +47,29 @@ namespace Oblig1Vy.MVC.Controllers
             return RedirectToAction("TicketOrder", new { id = ticketId});
         }
 
-
-        public ActionResult TicketOrder(int? ticketId)
+        [HttpGet]
+        public ActionResult TicketOrder(int? id)
         {
-            if (ticketId == null)
+            if (id == null)
             {
                 return RedirectToAction("Index");
             }
 
             var ticketService = new TicketService();
-            var ticket = ticketService.GetTicket(ticketId.Value);
+            var ticket = ticketService.GetTicket(id.Value);
 
             return View(ticket);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TicketOrder(FinalizeTicketVm finalizeTicketVm)
+        {
+            var ticketService = new TicketService();
+            ticketService.FinalizeTicket(finalizeTicketVm);
 
+            return RedirectToAction("TicketSummary", new { id = finalizeTicketVm.TicketId });
+        }
 
         [HttpGet]
         public ActionResult TicketSummary(int? id)

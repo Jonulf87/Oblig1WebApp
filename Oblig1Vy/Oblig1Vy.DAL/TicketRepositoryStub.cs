@@ -18,7 +18,7 @@ namespace Oblig1Vy.DAL
                 DepartureStationId = 0,
                 TripId = 1,
                 JourneyDate = DateTime.Parse("2020-05-01"),
-                Id = 25
+                Id = 1
             };
 
             return travelTicket.Id;
@@ -40,12 +40,18 @@ namespace Oblig1Vy.DAL
         {
             return new TicketVm
             {
+                Id = 5,
                 TripId = 1,
                 Date = DateTime.Now,
                 DepartureStationId = 1,
                 ArrivalStationId = 2,
                 Price = 300
             };
+        }
+
+        public void FinalizeTicket(FinalizeTicketVm finalizeTicket)
+        {
+            
         }
     }
 }

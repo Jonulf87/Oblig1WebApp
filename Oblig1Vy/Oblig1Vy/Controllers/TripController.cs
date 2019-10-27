@@ -47,6 +47,8 @@ namespace Oblig1Vy.Controllers
                 return RedirectToAction("Index");
             }
 
+            SetDropdownsInViewBags();
+
             var tripService = new TripService();
             var trip = tripService.GetTrip(id.Value);
 
@@ -60,7 +62,7 @@ namespace Oblig1Vy.Controllers
             var tripService = new TripService();
             tripService.UpdateTrip(trip, User.Identity.Name);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("DetailsTrip", new { id = trip.Id});
         }
 
         [HttpGet]
